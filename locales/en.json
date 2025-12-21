@@ -7,5 +7,407 @@
     "subTitle": "Start your favorite course",
     "desc": "It has survived not only five centuries but also the leap into electronic typesetting.",
     "btn": "Start A Course"
+  },
+
+  "courses": {
+    "title": [
+      "UX/UI Design",
+      "Development",
+      "Data Science",
+      "Business",
+      "Design",
+      "Marketing",
+      "Finance"
+    ],
+
+    "cards": [
+      {
+        "id": 1,
+
+        "category": "Development",
+        "title": "Web Development Bootcamp for Beginners",
+        "instructor": "John Doe",
+        "rating": "4.9",
+        "time": "12h 30m",
+        "lectures": " 5 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 2,
+        "title": "Mastering Modern UI Wireframes",
+        "category": "UX/UI Design",
+        "rating": 4.8,
+        "time": "06 hr 40 mins",
+        "lectures": "22 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 3,
+        "title": "UX Fundamentals & User Psychology",
+        "category": "UX/UI Design",
+        "rating": 4.7,
+        "time": "05 hr 20 mins",
+        "lectures": "18 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 4,
+        "title": "Figma UI Projects From Scratch",
+        "category": "UX/UI Design",
+        "rating": 4.9,
+        "time": "07 hr 10 mins",
+        "lectures": "26 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 5,
+        "title": "Mobile UI Principles & Patterns",
+        "category": "UX/UI Design",
+        "rating": 4.6,
+        "time": "04 hr 50 mins",
+        "lectures": "15 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 6,
+        "title": "User Research & Usability Testing",
+        "category": "UX/UI Design",
+        "rating": 4.7,
+        "time": "06 hr 15 mins",
+        "lectures": "20 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 7,
+        "title": "Full-Stack Web Development Bootcamp",
+        "category": "Development",
+        "rating": 4.7,
+        "time": "12 hr 15 mins",
+        "lectures": "34 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 8,
+        "title": "React & Node.js Mega Course",
+        "category": "Development",
+        "rating": 4.8,
+        "time": "10 hr 50 mins",
+        "lectures": "28 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 9,
+        "title": "Advanced JavaScript Deep Dive",
+        "category": "Development",
+        "rating": 4.9,
+        "time": "09 hr 30 mins",
+        "lectures": "31 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 10,
+        "title": "Backend Development With Express",
+        "category": "Development",
+        "rating": 4.6,
+        "time": "08 hr 10 mins",
+        "lectures": "22 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 11,
+        "title": "DevOps Basics For Beginners",
+        "category": "Development",
+        "rating": 4.7,
+        "time": "06 hr 55 mins",
+        "lectures": "18 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 12,
+        "title": "Building REST APIs With MongoDB",
+        "category": "Development",
+        "rating": 4.8,
+        "time": "07 hr 20 mins",
+        "lectures": "24 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 13,
+        "title": "Data Science With Python: Practical Guide",
+        "category": "Data Science",
+        "rating": 4.9,
+        "time": "09 hr 50 mins",
+        "lectures": "29 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 14,
+        "title": "Machine Learning Foundations",
+        "category": "Data Science",
+        "rating": 4.8,
+        "time": "08 hr 40 mins",
+        "lectures": "27 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 15,
+        "title": "Deep Learning With TensorFlow",
+        "category": "Data Science",
+        "rating": 4.7,
+        "time": "10 hr 30 mins",
+        "lectures": "33 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 16,
+        "title": "Statistics For Data Analysis",
+        "category": "Data Science",
+        "rating": 4.6,
+        "time": "06 hr 25 mins",
+        "lectures": "21 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 17,
+        "title": "SQL & Data Visualization",
+        "category": "Data Science",
+        "rating": 4.8,
+        "time": "07 hr 35 mins",
+        "lectures": "25 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 18,
+        "title": "AI & Neural Networks Basics",
+        "category": "Data Science",
+        "rating": 4.7,
+        "time": "05 hr 55 mins",
+        "lectures": "19 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 19,
+        "title": "Business Strategy For Startups",
+        "category": "Business",
+        "rating": 4.6,
+        "time": "05 hr 30 mins",
+        "lectures": "18 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 20,
+        "title": "Entrepreneurship Bootcamp",
+        "category": "Business",
+        "rating": 4.8,
+        "time": "07 hr 15 mins",
+        "lectures": "24 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 21,
+        "title": "Business Analytics Essentials",
+        "category": "Business",
+        "rating": 4.7,
+        "time": "06 hr 50 mins",
+        "lectures": "22 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 22,
+        "title": "Sales & Negotiation Skills",
+        "category": "Business",
+        "rating": 4.6,
+        "time": "05 hr 10 mins",
+        "lectures": "17 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 23,
+        "title": "Leadership & Management Mastery",
+        "category": "Business",
+        "rating": 4.9,
+        "time": "08 hr 05 mins",
+        "lectures": "28 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 24,
+        "title": "Financial Modeling For Managers",
+        "category": "Business",
+        "rating": 4.7,
+        "time": "06 hr 30 mins",
+        "lectures": "20 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 25,
+        "title": "Creative Graphic Design Essentials",
+        "category": "Design",
+        "rating": 4.7,
+        "time": "07 hr 10 mins",
+        "lectures": "25 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 26,
+        "title": "Adobe Photoshop Practical Course",
+        "category": "Design",
+        "rating": 4.8,
+        "time": "06 hr 45 mins",
+        "lectures": "23 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 27,
+        "title": "Illustrator Logo Design Mastery",
+        "category": "Design",
+        "rating": 4.9,
+        "time": "08 hr 20 mins",
+        "lectures": "30 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 28,
+        "title": "Brand Identity & Visual Systems",
+        "category": "Design",
+        "rating": 4.7,
+        "time": "05 hr 55 mins",
+        "lectures": "19 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 29,
+        "title": "Poster & Digital Art Workshop",
+        "category": "Design",
+        "rating": 4.6,
+        "time": "04 hr 40 mins",
+        "lectures": "15 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 30,
+        "title": "Color Theory For Designers",
+        "category": "Design",
+        "rating": 4.8,
+        "time": "06 hr 20 mins",
+        "lectures": "21 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 31,
+        "title": "Digital Marketing Masterclass",
+        "category": "Marketing",
+        "rating": 4.8,
+        "time": "08 hr 20 mins",
+        "lectures": "27 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 32,
+        "title": "Social Media Marketing Essentials",
+        "category": "Marketing",
+        "rating": 4.7,
+        "time": "06 hr 10 mins",
+        "lectures": "20 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 33,
+        "title": "SEO & Content Strategy",
+        "category": "Marketing",
+        "rating": 4.9,
+        "time": "07 hr 45 mins",
+        "lectures": "25 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 34,
+        "title": "Email Marketing Automation",
+        "category": "Marketing",
+        "rating": 4.6,
+        "time": "05 hr 35 mins",
+        "lectures": "16 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 35,
+        "title": "Brand Marketing Psychology",
+        "category": "Marketing",
+        "rating": 4.8,
+        "time": "06 hr 50 mins",
+        "lectures": "23 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 36,
+        "title": "Paid Advertising & Google Ads",
+        "category": "Marketing",
+        "rating": 4.7,
+        "time": "05 hr 55 mins",
+        "lectures": "19 Lectures"
+      },
+
+      {
+        "instructor": "John Doe",
+        "id": 37,
+        "title": "Finance Fundamentals For Beginners",
+        "category": "Finance",
+        "rating": 4.7,
+        "time": "05 hr 40 mins",
+        "lectures": "18 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 38,
+        "title": "Investment & Stock Market Basics",
+        "category": "Finance",
+        "rating": 4.9,
+        "time": "07 hr 20 mins",
+        "lectures": "26 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 39,
+        "title": "Accounting Essentials",
+        "category": "Finance",
+        "rating": 4.6,
+        "time": "06 hr 10 mins",
+        "lectures": "21 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 40,
+        "title": "Financial Planning & Budgeting",
+        "category": "Finance",
+        "rating": 4.7,
+        "time": "05 hr 30 mins",
+        "lectures": "17 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 41,
+        "title": "Corporate Finance Mastery",
+        "category": "Finance",
+        "rating": 4.8,
+        "time": "09 hr 00 mins",
+        "lectures": "32 Lectures"
+      },
+      {
+        "instructor": "John Doe",
+        "id": 42,
+        "title": "Risk Management For Professionals",
+        "category": "Finance",
+        "rating": 4.7,
+        "time": "06 hr 25 mins",
+        "lectures": "20 Lectures"
+      }
+    ]
   }
 }

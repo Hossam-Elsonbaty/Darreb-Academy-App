@@ -9,10 +9,10 @@ export default function Hero() {
   const hero = t('hero', { returnObjects: true });
   return (
     <View className={` px-4 ${language === 'en' ? 'items-start' : 'items-end '}`}>
-      <Text className="text-main text-lg font-medium">{hero.subTitle}</Text>
+      <Text className="text-lg font-medium text-main">{hero.subTitle}</Text>
 
       <Text
-        className={`leading-13  my-5 text-3xl font-semibold ${language === 'en' ? 'items-start' : 'items-end '}`}>
+        className={`leading-13 my-5  text-3xl font-semibold ${language === 'en' ? 'text-left' : 'text-right '}`}>
         {language === 'ar' ? (
           <>
             تعلم الان من اى مكان وابنى
@@ -26,9 +26,12 @@ export default function Hero() {
         )}
       </Text>
 
-      <Text className="text-gray mx-auto max-w-md text-base">{hero.desc}</Text>
+      <Text
+        className={`mx-auto max-w-md text-base text-gray ${language === 'en' ? 'text-left' : 'text-right '}`}>
+        {hero.desc}
+      </Text>
 
-      <TouchableOpacity className=" bg-main mt-5 w-max items-center justify-center rounded-lg px-8 py-2">
+      <TouchableOpacity className=" mt-5 w-max items-center justify-center rounded-lg bg-main px-8 py-2">
         <Text className="text-lg font-semibold text-white">{hero.btn}</Text>
       </TouchableOpacity>
 
