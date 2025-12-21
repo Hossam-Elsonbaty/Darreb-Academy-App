@@ -1,5 +1,11 @@
 {
-  "welcome": "Welcome",
-  "login": "Login",
-  "logout": "Logout"
+  "home": "Home Screen",
+  "about": "About Screen",
+
+  "links": ["Home", "About", "Contact"],
+  "hero": {
+    "subTitle": "Start your favorite course",
+    "desc": "It has survived not only five centuries but also the leap into electronic typesetting.",
+    "btn": "Start A Course"
+  }
 }
