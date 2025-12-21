@@ -1,0 +1,42 @@
+import { View, Text, Button, TouchableOpacity, Image } from 'react-native';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
+import { LanguageContext } from 'context/LanguageContext';
+
+export default function Hero() {
+  const { t } = useTranslation();
+  const { language } = useContext(LanguageContext);
+  const hero = t('hero', { returnObjects: true });
+  return (
+    <View className={` px-4 ${language === 'en' ? 'items-start' : 'items-end '}`}>
+      <Text className="text-main text-lg font-medium">{hero.subTitle}</Text>
+
+      <Text
+        className={`leading-13  my-5 text-3xl font-semibold ${language === 'en' ? 'items-start' : 'items-end '}`}>
+        {language === 'ar' ? (
+          <>
+            تعلم الان من اى مكان وابنى
+            <Text className="text-main">مستقبلك المشرق</Text>
+          </>
+        ) : (
+          <>
+            Now learning from anywhere, and build your{' '}
+            <Text className="text-main">bright career.</Text>
+          </>
+        )}
+      </Text>
+
+      <Text className="text-gray mx-auto max-w-md text-base">{hero.desc}</Text>
+
+      <TouchableOpacity className=" bg-main mt-5 w-max items-center justify-center rounded-lg px-8 py-2">
+        <Text className="text-lg font-semibold text-white">{hero.btn}</Text>
+      </TouchableOpacity>
+
+      <Image
+        source={require('../assets/hero-img.png')}
+        resizeMode="contain"
+        className="mx-auto my-10 h-[250px] w-[250px]"
+      />
+    </View>
+  );
+}
