@@ -1,16 +1,14 @@
-import Courses from 'components/Courses';
-import Hero from 'components/Hero';
+import Courses from 'components/home/Courses';
+import Hero from 'components/home/Hero';
+import Works from 'components/home/Works';
 import ScreenWrapper from 'components/WrapperScreen';
-
-import { View } from 'react-native';
 
 export default function HomeScreen() {
   return (
     <ScreenWrapper>
-      <View>
-        <Hero />
-        <Courses />
-      </View>
+      <Hero />
+      <Courses />
+      <Works />
     </ScreenWrapper>
   );
 }

@@ -1,4 +1,4 @@
-import { View, Text, Button, TouchableOpacity, Image } from 'react-native';
+import { View, Text,  TouchableOpacity, Image } from 'react-native';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageContext } from 'context/LanguageContext';
@@ -36,7 +36,7 @@ export default function Hero() {
       </TouchableOpacity>
 
       <Image
-        source={require('../assets/hero-img.png')}
+        source={require('../../assets/hero-img.png')}
         resizeMode="contain"
         className="mx-auto my-10 h-[250px] w-[250px]"
       />
