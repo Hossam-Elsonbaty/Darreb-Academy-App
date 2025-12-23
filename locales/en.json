@@ -411,7 +411,7 @@
     ]
   },
 
-   "work": [
+  "work": [
     {
       "id": 1,
       "title": "Find your Course",
@@ -431,7 +431,7 @@
     }
   ],
 
-   "testimonials": [
+  "testimonials": [
     {
       "id": 1,
       "rating": 3.5,
@@ -474,6 +474,29 @@
       "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
       "name": "Sara Alexander",
       "job": "Product Designer"
+    }
+  ],
+
+  "news": [
+    {
+      "id": 1,
+      "category": "Development",
+      "title": "Data Science and Machine Learning with Python - Hands On!",
+      "instructor": "John Doe"
+    },
+
+    {
+      "id": 2,
+      "title": "Create Amazing Color Schemes for Your UX Design Projects",
+      "category": "UX/UI Design",
+      "instructor": "John Doe"
+    },
+    {
+      "id": 3,
+      "title": "Culture & Leadership: Strategies for a Successful Business",
+      "category": "UX/UI Design",
+
+      "instructor": "John Doe"
     }
   ]
 }
