@@ -429,5 +429,51 @@
       "title": "Get Certificate",
       "desc": "It has survived not only centurie also leap into electronic."
     }
+  ],
+
+   "testimonials": [
+    {
+      "id": 1,
+      "rating": 3.5,
+      "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
+      "name": "Sara Alexander",
+      "job": "Product Designer"
+    },
+    {
+      "id": 2,
+      "rating": 5,
+      "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
+      "name": "Sara Alexander",
+      "job": "Product Designer"
+    },
+    {
+      "id": 3,
+      "rating": 4.5,
+      "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
+      "name": "Sara Alexander",
+      "job": "Product Designer"
+    },
+
+    {
+      "id": 4,
+      "rating": 3.5,
+      "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
+      "name": "Sara Alexander",
+      "job": "Product Designer"
+    },
+    {
+      "id": 5,
+      "rating": 5,
+      "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
+      "name": "Sara Alexander",
+      "job": "Product Designer"
+    },
+    {
+      "id": 6,
+      "rating": 4.5,
+      "desc": "It has survived not only centurie also leap into electronic It has survived not only centurie also leap into electronic",
+      "name": "Sara Alexander",
+      "job": "Product Designer"
+    }
   ]
 }
