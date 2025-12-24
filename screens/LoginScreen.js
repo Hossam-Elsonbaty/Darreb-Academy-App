@@ -13,12 +13,22 @@ import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { LanguageContext } from 'context/LanguageContext';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import loginimg from "../assets/login.png";
 
 export default function LoginScreen() {
   const { language } =useContext(LanguageContext);
   const navigation = useNavigation();
+  const inputClassName = `
+  w-full h-[60px] px-6
+  text-[15px] text-[#52565b]
+  border border-[rgba(48,146,85,0.2)]
+  rounded-[10px] bg-white
+  focus:border-main focus:outline-none
+`;
+const [showPassword, setShowPassword] = React.useState(false);
+
 
   const {
     control,
@@ -82,53 +92,84 @@ export default function LoginScreen() {
 
           {/* EMAIL */}
           <Controller
-            control={control}
-            name="email"
-            rules={{
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email format",
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                placeholder="Email"
-                keyboardType="email-address"
-                value={value}
-                onChangeText={onChange}
-                className="h-[60px] px-6 border border-[rgba(48,146,85,0.2)] rounded-lg"
-              />
-            )}
-          />
-          {errors.email && (
-            <Text className="text-red-500">{errors.email.message}</Text>
-          )}
+  control={control}
+  name="email"
+  rules={{
+    required:
+      language === "en"
+        ? "Email is required"
+        : "البريد الإلكتروني مطلوب",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message:
+        language === "en"
+          ? "Invalid email format"
+          : "صيغة البريد الإلكتروني غير صحيحة",
+    },
+  }}
+  render={({ field: { onChange, value } }) => (
+    <TextInput
+      value={value}
+      onChangeText={onChange}
+      keyboardType="email-address"
+      placeholder={language === "en" ? "Email" : "البريد الإلكتروني"}
+      className={inputClassName}
+    />
+  )}
+/>
+
+{errors.email && (
+  <Text className="text-red-500">{errors.email.message}</Text>
+)}
 
           {/* PASSWORD */}
-          <Controller
-            control={control}
-            name="password"
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                placeholder="Password"
-                secureTextEntry
-                value={value}
-                onChangeText={onChange}
-                className="h-[60px] px-6 border border-[rgba(48,146,85,0.2)] rounded-lg"
-              />
-            )}
-          />
-          {errors.password && (
-            <Text className="text-red-500">{errors.password.message}</Text>
-          )}
+ <Controller
+  control={control}
+  name="password"
+  rules={{
+    required:
+      language === "en"
+        ? "Password is required"
+        : "كلمة المرور مطلوبة",
+    minLength: {
+      value: 8,
+      message:
+        language === "en"
+          ? "Password must be at least 8 characters"
+          : "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+    },
+  }}
+  render={({ field: { onChange, value } }) => (
+    <View className="relative">
+      <TextInput
+        value={value}
+        onChangeText={onChange}
+        secureTextEntry={!showPassword}
+        placeholder={
+          language === "en" ? "Password" : "كلمة المرور"
+        }
+        className={inputClassName}
+      />
+
+      {/* 👁 Eye */}
+      <Pressable
+        onPress={() => setShowPassword(!showPassword)}
+        className="absolute right-4 top-1/2 -translate-y-1/2"
+      >
+        <Ionicons
+          name={showPassword ? "eye-off-outline" : "eye-outline"}
+          size={22}
+          color="#52565b"
+        />
+      </Pressable>
+    </View>
+  )}
+/>
+
+{errors.password && (
+  <Text className="text-red-500">{errors.password.message}</Text>
+)}
+
 
           {/* LOGIN BUTTON */}
           <Pressable
