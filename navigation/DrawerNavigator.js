@@ -8,6 +8,7 @@ import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import ContactScreen from '../screens/ContactScreen';
 import { t } from 'i18next';
+import CoursesScreen from '../screens/CoursesScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -67,7 +68,17 @@ export default function DrawerNavigator() {
             <Ionicons name="mail-outline" size={size} color={color} />
           ),
         }}
+        
       />
+        <Drawer.Screen
+        name="Courses"
+        component={CoursesScreen}
+        options={{
+          title: links[3],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="mail-outline" size={size} color={color} />
+          ),
+        }}/>
     </Drawer.Navigator>
   );
 }
