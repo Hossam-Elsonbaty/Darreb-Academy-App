@@ -1,25 +1,40 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
   TextInput,
   Pressable,
-  Modal,
   ScrollView,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { Ionicons, Feather } from "@expo/vector-icons";
-import { LanguageContext } from 'context/LanguageContext';
-
+import Toast from "react-native-toast-message";
+import { LanguageContext } from "context/LanguageContext";
 import SectionTitle from "common/SectionTitle";
 
-export default function ContactScreen() {
-  const [showModal, setShowModal] = useState(false);
-  const [modalType, setModalType] = useState("success");
-  const [modalMessage, setModalMessage] = useState("");
 
-  const { language } =useContext(LanguageContext);
+const inputClassName = `
+                      w-full h-[60px] px-6 
+                      text-[15px] text-[#52565b] 
+                      border border-[rgba(48,146,85,0.2)] 
+                      rounded-[10px] bg-white 
+                      transition-all duration-300 
+                      focus:border-main focus:outline-none
+`;
+
+const textareaClassName = `
+                      w-full h-40 px-6 py-4
+                      text-[15px] text-[#52565b]
+                      border border-[rgba(48,146,85,0.2)]
+                      rounded-[10px] bg-white
+                      transition-all duration-300
+                      focus:border-main focus:outline-none
+                      resize-none
+`;
+
+export default function ContactScreen() {
+  const { language } = useContext(LanguageContext);
 
   const {
     control,
@@ -34,45 +49,58 @@ export default function ContactScreen() {
         data
       )
       .then(() => {
-        setModalType("success");
-        setModalMessage(
-          language === "en"
-            ? "Message sent successfully"
-            : "تم إرسال الرسالة بنجاح"
-        );
-        setShowModal(true);
+        Toast.show({
+          type: "success",
+          text1: language === "en" ? "Success" : "تم بنجاح",
+          text2:
+            language === "en"
+              ? "Message sent successfully"
+              : "تم إرسال الرسالة بنجاح",
+        });
       })
       .catch(() => {
-        setModalType("error");
-        setModalMessage(
-          language === "en"
-            ? "Something went wrong, try again"
-            : "حصل خطأ، حاول مرة أخرى"
-        );
-        setShowModal(true);
+        Toast.show({
+          type: "error",
+          text1: language === "en" ? "Error" : "خطأ",
+          text2:
+            language === "en"
+              ? "Something went wrong, try again"
+              : "حصل خطأ، حاول مرة أخرى",
+        });
       });
   };
 
   return (
-    <ScrollView className="bg-white">
-
-
-       <SectionTitle
-  title={language === "en" ? "Get in Touch With Us" : "تواصل معنا"}
-/> 
+    <ScrollView
+      className="bg-white"
+      contentContainerStyle={{
+        direction: language === "ar" ? "rtl" : "ltr",
+      }}
+    >
+      {/* TITLE */}
+      <SectionTitle
+        title={language === "en" ? "Get in Touch With Us" : "تواصل معنا"}
+      />
 
       {/* CARD */}
       <View className="mx-4 my-10 border border-[rgba(48,146,85,0.2)] rounded-[30px] overflow-hidden">
 
-        {/* LEFT INFO */}
+        {/* CONTACT INFO */}
         <View className="bg-[#e9f8ef] px-6 py-10 gap-8">
+
           {/* Phone */}
-          <View className="flex-row items-center gap-5">
+          <View
+            className={`flex-row items-center gap-5 ${
+              language === "ar" ? "flex-row-reverse" : ""
+            }`}
+          >
             <View className="w-16 h-16 rounded-full border border-[#bde5cc] bg-white items-center justify-center">
               <Feather name="phone" size={24} color="#309255" />
             </View>
             <View>
-              <Text className="text-sm text-gray-500">Phone No.</Text>
+              <Text className="text-sm text-gray-500">
+                {language === "en" ? "Phone No." : "رقم الهاتف"}
+              </Text>
               <Text className="text-lg font-medium text-[#212832]">
                 (88) 193 326 867
               </Text>
@@ -80,12 +108,18 @@ export default function ContactScreen() {
           </View>
 
           {/* Email */}
-          <View className="flex-row items-center gap-5">
+          <View
+            className={`flex-row items-center gap-5 ${
+              language === "ar" ? "flex-row-reverse" : ""
+            }`}
+          >
             <View className="w-16 h-16 rounded-full border border-[#bde5cc] bg-white items-center justify-center">
-<Ionicons name="mail-outline" size={24} color="#309255" />
+              <Ionicons name="mail-outline" size={24} color="#309255" />
             </View>
             <View>
-              <Text className="text-sm text-gray-500">Email Address</Text>
+              <Text className="text-sm text-gray-500">
+                {language === "en" ? "Email Address" : "البريد الإلكتروني"}
+              </Text>
               <Text className="text-lg font-medium text-[#212832]">
                 edule100@gmail.com
               </Text>
@@ -93,12 +127,18 @@ export default function ContactScreen() {
           </View>
 
           {/* Address */}
-          <View className="flex-row items-center gap-5">
+          <View
+            className={`flex-row items-center gap-5 ${
+              language === "ar" ? "flex-row-reverse" : ""
+            }`}
+          >
             <View className="w-16 h-16 rounded-full border border-[#bde5cc] bg-white items-center justify-center">
               <Ionicons name="location-outline" size={24} color="#309255" />
             </View>
             <View>
-              <Text className="text-sm text-gray-500">Office Address</Text>
+              <Text className="text-sm text-gray-500">
+                {language === "en" ? "Office Address" : "عنوان المكتب"}
+              </Text>
               <Text className="text-lg font-medium text-[#212832]">
                 Talga, Alabama, USA
               </Text>
@@ -108,19 +148,21 @@ export default function ContactScreen() {
 
         {/* FORM */}
         <View className="px-6 py-10 gap-4">
+
           {/* Name */}
           <Controller
             control={control}
             name="name"
             rules={{
-              required: language === "en" ? "Name is required" : "الاسم مطلوب",
+              required:
+                language === "en" ? "Name is required" : "الاسم مطلوب",
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
                 placeholder={language === "en" ? "Name" : "الاسم"}
                 value={value}
                 onChangeText={onChange}
-                className="h-[60px] px-5 border border-[rgba(48,146,85,0.2)] rounded-lg"
+                className={inputClassName}
               />
             )}
           />
@@ -134,7 +176,9 @@ export default function ContactScreen() {
             name="email"
             rules={{
               required:
-                language === "en" ? "Email is required" : "البريد الإلكتروني مطلوب",
+                language === "en"
+                  ? "Email is required"
+                  : "البريد الإلكتروني مطلوب",
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
@@ -142,7 +186,7 @@ export default function ContactScreen() {
                 value={value}
                 onChangeText={onChange}
                 keyboardType="email-address"
-                className="h-[60px] px-5 border border-[rgba(48,146,85,0.2)] rounded-lg"
+                className={inputClassName}
               />
             )}
           />
@@ -163,7 +207,7 @@ export default function ContactScreen() {
                 placeholder={language === "en" ? "Subject" : "الموضوع"}
                 value={value}
                 onChangeText={onChange}
-                className="h-[60px] px-5 border border-[rgba(48,146,85,0.2)] rounded-lg"
+                className={inputClassName}
               />
             )}
           />
@@ -193,7 +237,7 @@ export default function ContactScreen() {
                 onChangeText={onChange}
                 multiline
                 textAlignVertical="top"
-                className="h-40 px-5 py-4 border border-[rgba(48,146,85,0.2)] rounded-lg"
+                className={textareaClassName}
               />
             )}
           />
@@ -212,36 +256,6 @@ export default function ContactScreen() {
           </Pressable>
         </View>
       </View>
-
-      {/* MODAL */}
-      <Modal transparent visible={showModal} animationType="fade">
-        <View className="flex-1 bg-black/50 items-center justify-center">
-          <View className="bg-white w-[80%] rounded-2xl p-6 items-center">
-            <Ionicons
-              name={
-                modalType === "success"
-                  ? "checkmark-circle"
-                  : "close-circle"
-              }
-              size={64}
-              color={modalType === "success" ? "green" : "red"}
-            />
-            <Text className="text-lg text-center my-5">
-              {modalMessage}
-            </Text>
-            <Pressable
-              onPress={() => setShowModal(false)}
-              className={`px-6 py-2 rounded-lg ${
-                modalType === "success" ? "bg-green-600" : "bg-red-600"
-              }`}
-            >
-              <Text className="text-white font-medium">
-                {language === "en" ? "OK" : "حسناً"}
-              </Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
     </ScrollView>
   );
 }

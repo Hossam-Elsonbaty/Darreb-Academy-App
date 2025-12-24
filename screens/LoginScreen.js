@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -6,29 +6,31 @@ import {
   Pressable,
   Image,
   ScrollView,
-  Alert,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { LanguageContext } from 'context/LanguageContext';
+import { LanguageContext } from "context/LanguageContext";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Toast from "react-native-toast-message";
 
 import loginimg from "../assets/login.png";
 
-export default function LoginScreen() {
-  const { language } =useContext(LanguageContext);
-  const navigation = useNavigation();
-  const inputClassName = `
-  w-full h-[60px] px-6
-  text-[15px] text-[#52565b]
-  border border-[rgba(48,146,85,0.2)]
-  rounded-[10px] bg-white
-  focus:border-main focus:outline-none
-`;
-const [showPassword, setShowPassword] = React.useState(false);
 
+const inputClassName = `
+                     w-full h-[60px] px-6 
+                      text-[15px] text-[#52565b] 
+                      border border-[rgba(48,146,85,0.2)] 
+                      rounded-[10px] bg-white 
+                      transition-all duration-300 
+                      focus:border-main focus:outline-none
+`;
+
+export default function LoginScreen() {
+  const { language } = useContext(LanguageContext);
+  const navigation = useNavigation();
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     control,
@@ -53,27 +55,43 @@ const [showPassword, setShowPassword] = React.useState(false);
         await AsyncStorage.setItem("token", token);
         await AsyncStorage.setItem("userData", JSON.stringify(userData));
 
-        navigation.navigate("Home"); 
+        Toast.show({
+          type: "success",
+          text1: language === "en" ? "Success" : "تم بنجاح",
+          text2:
+            language === "en"
+              ? "Logged in successfully"
+              : "تم تسجيل الدخول بنجاح",
+        });
+
+        navigation.navigate("Home");
       }
     } catch (error) {
-      Alert.alert(
-        language === "en" ? "Login Failed" : "فشل تسجيل الدخول",
-        error.response?.data?.message ||
+      Toast.show({
+        type: "error",
+        text1: language === "en" ? "Login Failed" : "فشل تسجيل الدخول",
+        text2:
+          error.response?.data?.message ||
           (language === "en"
             ? "Invalid email or password"
-            : "البريد الإلكتروني أو كلمة المرور غير صحيحة")
-      );
+            : "البريد الإلكتروني أو كلمة المرور غير صحيحة"),
+      });
     }
   };
 
   return (
-    <ScrollView className="bg-white flex-1">
+    <ScrollView
+      className="bg-white flex-1"
+      contentContainerStyle={{
+        direction: language === "ar" ? "rtl" : "ltr",
+      }}
+    >
       <View className="min-h-screen px-6 py-16 items-center justify-center">
 
         {/* IMAGE */}
         <Image
           source={loginimg}
-          className="w-5 h-5" 
+          className="w-[300px] h-[300px] mb-6"
           resizeMode="contain"
         />
 
@@ -92,84 +110,83 @@ const [showPassword, setShowPassword] = React.useState(false);
 
           {/* EMAIL */}
           <Controller
-  control={control}
-  name="email"
-  rules={{
-    required:
-      language === "en"
-        ? "Email is required"
-        : "البريد الإلكتروني مطلوب",
-    pattern: {
-      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      message:
-        language === "en"
-          ? "Invalid email format"
-          : "صيغة البريد الإلكتروني غير صحيحة",
-    },
-  }}
-  render={({ field: { onChange, value } }) => (
-    <TextInput
-      value={value}
-      onChangeText={onChange}
-      keyboardType="email-address"
-      placeholder={language === "en" ? "Email" : "البريد الإلكتروني"}
-      className={inputClassName}
-    />
-  )}
-/>
-
-{errors.email && (
-  <Text className="text-red-500">{errors.email.message}</Text>
-)}
+            control={control}
+            name="email"
+            rules={{
+              required:
+                language === "en"
+                  ? "Email is required"
+                  : "البريد الإلكتروني مطلوب",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message:
+                  language === "en"
+                    ? "Invalid email format"
+                    : "صيغة البريد الإلكتروني غير صحيحة",
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <TextInput
+                value={value}
+                onChangeText={onChange}
+                keyboardType="email-address"
+                placeholder={language === "en" ? "Email" : "البريد الإلكتروني"}
+                className={inputClassName}
+              />
+            )}
+          />
+          {errors.email && (
+            <Text className="text-red-500">{errors.email.message}</Text>
+          )}
 
           {/* PASSWORD */}
- <Controller
-  control={control}
-  name="password"
-  rules={{
-    required:
-      language === "en"
-        ? "Password is required"
-        : "كلمة المرور مطلوبة",
-    minLength: {
-      value: 8,
-      message:
-        language === "en"
-          ? "Password must be at least 8 characters"
-          : "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
-    },
-  }}
-  render={({ field: { onChange, value } }) => (
-    <View className="relative">
-      <TextInput
-        value={value}
-        onChangeText={onChange}
-        secureTextEntry={!showPassword}
-        placeholder={
-          language === "en" ? "Password" : "كلمة المرور"
-        }
-        className={inputClassName}
-      />
+          <Controller
+            control={control}
+            name="password"
+            rules={{
+              required:
+                language === "en"
+                  ? "Password is required"
+                  : "كلمة المرور مطلوبة",
+              minLength: {
+                value: 8,
+                message:
+                  language === "en"
+                    ? "Password must be at least 8 characters"
+                    : "كلمة المرور يجب أن تكون 8 أحرف على الأقل",
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <View className="relative">
+                <TextInput
+                  value={value}
+                  onChangeText={onChange}
+                  secureTextEntry={!showPassword}
+                  placeholder={
+                    language === "en" ? "Password" : "كلمة المرور"
+                  }
+                  className={inputClassName}
+                />
 
-      {/* 👁 Eye */}
-      <Pressable
-        onPress={() => setShowPassword(!showPassword)}
-        className="absolute right-4 top-1/2 -translate-y-1/2"
-      >
-        <Ionicons
-          name={showPassword ? "eye-off-outline" : "eye-outline"}
-          size={22}
-          color="#52565b"
-        />
-      </Pressable>
-    </View>
-  )}
-/>
-
-{errors.password && (
-  <Text className="text-red-500">{errors.password.message}</Text>
-)}
-
+                {/* 👁 Eye */}
+                <Pressable
+                  onPress={() => setShowPassword(!showPassword)}
+                  className={`absolute ${
+                    language === "ar" ? "left-4" : "right-4"
+                  } top-1/2 -translate-y-1/2`}
+                >
+                  <Ionicons
+                    name={showPassword ? "eye-off-outline" : "eye-outline"}
+                    size={22}
+                    color="#52565b"
+                  />
+                </Pressable>
+              </View>
+            )}
+          />
+          {errors.password && (
+            <Text className="text-red-500">{errors.password.message}</Text>
+          )}
 
           {/* LOGIN BUTTON */}
           <Pressable

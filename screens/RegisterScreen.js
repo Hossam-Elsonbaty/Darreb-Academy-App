@@ -11,13 +11,26 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-
 import loginimg from "../assets/login.png";
 import { LanguageContext } from 'context/LanguageContext';
+import { Ionicons } from "@expo/vector-icons";
 
 export default function RegisterScreen() {
   const navigation = useNavigation();
   const { language } =useContext(LanguageContext);
+
+  const inputClassName = `
+  
+                      w-full h-[60px] px-6 
+                      text-[15px] text-[#52565b] 
+                      border border-[rgba(48,146,85,0.2)] 
+                      rounded-[10px] bg-white 
+                      transition-all duration-300 
+                      focus:border-main focus:outline-none
+`;
+const [showPassword, setShowPassword] = React.useState(false);
+const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+
 
   const {
     control,
@@ -51,7 +64,7 @@ export default function RegisterScreen() {
       );
 
       if (response.status === 201) {
-        navigation.navigate("register"); 
+        navigation.navigate("Login"); 
       }
     } catch (error) {
       Alert.alert(
@@ -90,96 +103,152 @@ export default function RegisterScreen() {
 
           {/* NAME */}
           <Controller
-            control={control}
-            name="name"
-            rules={{ required: "Name is required" }}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                placeholder="Name"
-                value={value}
-                onChangeText={onChange}
-                className="h-[60px] px-6 border border-[rgba(48,146,85,0.2)] rounded-lg"
-              />
-            )}
-          />
-          {errors.name && (
-            <Text className="text-red-500">{errors.name.message}</Text>
-          )}
+  control={control}
+  name="name"
+  rules={{
+    required:
+      language === "en" ? "Name is required" : "الاسم مطلوب",
+  }}
+  render={({ field: { onChange, value } }) => (
+    <TextInput
+      placeholder={language === "en" ? "Name" : "الاسم"}
+      value={value}
+      onChangeText={onChange}
+      className={inputClassName}
+    />
+  )}
+/>
+{errors.name && <Text className="text-red-500">{errors.name.message}</Text>}
+
 
           {/* EMAIL */}
-          <Controller
-            control={control}
-            name="email"
-            rules={{
-              required: "Email is required",
-              pattern: {
-                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                message: "Invalid email format",
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                placeholder="Email"
-                keyboardType="email-address"
-                value={value}
-                onChangeText={onChange}
-                className="h-[60px] px-6 border border-[rgba(48,146,85,0.2)] rounded-lg"
-              />
-            )}
-          />
-          {errors.email && (
-            <Text className="text-red-500">{errors.email.message}</Text>
-          )}
+        <Controller
+  control={control}
+  name="email"
+  rules={{
+    required:
+      language === "en"
+        ? "Email is required"
+        : "البريد الإلكتروني مطلوب",
+    pattern: {
+      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      message:
+        language === "en"
+          ? "Invalid email format"
+          : "صيغة البريد الإلكتروني غير صحيحة",
+    },
+  }}
+  render={({ field: { onChange, value } }) => (
+    <TextInput
+      placeholder={language === "en" ? "Email" : "البريد الإلكتروني"}
+      keyboardType="email-address"
+      value={value}
+      onChangeText={onChange}
+      className={inputClassName}
+    />
+  )}
+/>
+{errors.email && <Text className="text-red-500">{errors.email.message}</Text>}
 
           {/* PASSWORD */}
-          <Controller
-            control={control}
-            name="password"
-            rules={{
-              required: "Password is required",
-              minLength: {
-                value: 8,
-                message: "Password must be at least 8 characters",
-              },
-            }}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                placeholder="Password"
-                secureTextEntry
-                value={value}
-                onChangeText={onChange}
-                className="h-[60px] px-6 border border-[rgba(48,146,85,0.2)] rounded-lg"
-              />
-            )}
-          />
-          {errors.password && (
-            <Text className="text-red-500">{errors.password.message}</Text>
-          )}
+         <Controller
+  control={control}
+  name="password"
+  rules={{
+    required:
+      language === "en"
+        ? "Password is required"
+        : "كلمة المرور مطلوبة",
+    minLength: {
+      value: 8,
+      message:
+        language === "en"
+          ? "Password must be at least 8 characters"
+          : "كلمة المرور يجب ألا تقل عن 8 أحرف",
+    },
+  }}
+  render={({ field: { onChange, value } }) => (
+    <View className="relative">
+      <TextInput
+        placeholder={language === "en" ? "Password" : "كلمة المرور"}
+        secureTextEntry={!showPassword}
+        value={value}
+        onChangeText={onChange}
+        className={inputClassName}
+      />
+      <Pressable
+        onPress={() => setShowPassword(!showPassword)}
+        className={`absolute ${
+          language === "ar" ? "left-4" : "right-4"
+        } top-1/2 -translate-y-1/2`}
+      >
+        <Ionicons
+          name={showPassword ? "eye-off-outline" : "eye-outline"}
+          size={22}
+          color="#52565b"
+        />
+      </Pressable>
+    </View>
+  )}
+/>
+{errors.password && (
+  <Text className="text-red-500">{errors.password.message}</Text>
+)}
 
           {/* CONFIRM PASSWORD */}
-          <Controller
-            control={control}
-            name="confirmPassword"
-            rules={{
-              required: "Confirm your password",
-              validate: (value) =>
-                value === password || "Passwords do not match",
-            }}
-            render={({ field: { onChange, value } }) => (
-              <TextInput
-                placeholder="Confirm Password"
-                secureTextEntry
-                value={value}
-                onChangeText={onChange}
-                className="h-[60px] px-6 border border-[rgba(48,146,85,0.2)] rounded-lg"
-              />
-            )}
-          />
-          {errors.confirmPassword && (
-            <Text className="text-red-500">
-              {errors.confirmPassword.message}
-            </Text>
-          )}
+         <Controller
+  control={control}
+  name="confirmPassword"
+  rules={{
+    required:
+      language === "en"
+        ? "Confirm password"
+        : "تأكيد كلمة المرور",
+    validate: (value) =>
+      value === password ||
+      (language === "en"
+        ? "Passwords do not match"
+        : "كلمتا المرور غير متطابقتين"),
+  }}
+  render={({ field: { onChange, value } }) => (
+    <View className="relative">
+      <TextInput
+        placeholder={
+          language === "en"
+            ? "Confirm Password"
+            : "تأكيد كلمة المرور"
+        }
+        secureTextEntry={!showConfirmPassword}
+        value={value}
+        onChangeText={onChange}
+        className={inputClassName}
+      />
+      <Pressable
+        onPress={() =>
+          setShowConfirmPassword(!showConfirmPassword)
+        }
+        className={`absolute ${
+          language === "ar" ? "left-4" : "right-4"
+        } top-1/2 -translate-y-1/2`}
+      >
+        <Ionicons
+          name={
+            showConfirmPassword
+              ? "eye-off-outline"
+              : "eye-outline"
+          }
+          size={22}
+          color="#52565b"
+        />
+      </Pressable>
+    </View>
+  )}
+/>
+{errors.confirmPassword && (
+  <Text className="text-red-500">
+    {errors.confirmPassword.message}
+  </Text>
+)}
 
           {/* SUBMIT */}
           <Pressable
