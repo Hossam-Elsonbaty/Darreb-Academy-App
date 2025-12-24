@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -10,7 +10,8 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { Ionicons, Feather } from "@expo/vector-icons";
-import { useLanguage } from "../context/LanguageContext";
+import { LanguageContext } from 'context/LanguageContext';
+
 import SectionTitle from "common/SectionTitle";
 
 export default function ContactScreen() {
@@ -18,7 +19,7 @@ export default function ContactScreen() {
   const [modalType, setModalType] = useState("success");
   const [modalMessage, setModalMessage] = useState("");
 
-  const { lang } = useLanguage();
+  const { language } =useContext(LanguageContext);
 
   const {
     control,
@@ -35,7 +36,7 @@ export default function ContactScreen() {
       .then(() => {
         setModalType("success");
         setModalMessage(
-          lang === "en"
+          language === "en"
             ? "Message sent successfully"
             : "تم إرسال الرسالة بنجاح"
         );
@@ -44,7 +45,7 @@ export default function ContactScreen() {
       .catch(() => {
         setModalType("error");
         setModalMessage(
-          lang === "en"
+          language === "en"
             ? "Something went wrong, try again"
             : "حصل خطأ، حاول مرة أخرى"
         );
@@ -57,7 +58,7 @@ export default function ContactScreen() {
 
 
        <SectionTitle
-  title={lang === "en" ? "Get in Touch With Us" : "تواصل معنا"}
+  title={language === "en" ? "Get in Touch With Us" : "تواصل معنا"}
 /> 
 
       {/* CARD */}
@@ -112,11 +113,11 @@ export default function ContactScreen() {
             control={control}
             name="name"
             rules={{
-              required: lang === "en" ? "Name is required" : "الاسم مطلوب",
+              required: language === "en" ? "Name is required" : "الاسم مطلوب",
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
-                placeholder={lang === "en" ? "Name" : "الاسم"}
+                placeholder={language === "en" ? "Name" : "الاسم"}
                 value={value}
                 onChangeText={onChange}
                 className="h-[60px] px-5 border border-[rgba(48,146,85,0.2)] rounded-lg"
@@ -133,11 +134,11 @@ export default function ContactScreen() {
             name="email"
             rules={{
               required:
-                lang === "en" ? "Email is required" : "البريد الإلكتروني مطلوب",
+                language === "en" ? "Email is required" : "البريد الإلكتروني مطلوب",
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
-                placeholder={lang === "en" ? "Email" : "البريد الإلكتروني"}
+                placeholder={language === "en" ? "Email" : "البريد الإلكتروني"}
                 value={value}
                 onChangeText={onChange}
                 keyboardType="email-address"
@@ -155,11 +156,11 @@ export default function ContactScreen() {
             name="subject"
             rules={{
               required:
-                lang === "en" ? "Subject is required" : "الموضوع مطلوب",
+                language === "en" ? "Subject is required" : "الموضوع مطلوب",
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
-                placeholder={lang === "en" ? "Subject" : "الموضوع"}
+                placeholder={language === "en" ? "Subject" : "الموضوع"}
                 value={value}
                 onChangeText={onChange}
                 className="h-[60px] px-5 border border-[rgba(48,146,85,0.2)] rounded-lg"
@@ -176,18 +177,18 @@ export default function ContactScreen() {
             name="message"
             rules={{
               required:
-                lang === "en" ? "Message is required" : "الرسالة مطلوبة",
+                language === "en" ? "Message is required" : "الرسالة مطلوبة",
               minLength: {
                 value: 20,
                 message:
-                  lang === "en"
+                  language === "en"
                     ? "Message must be at least 20 characters"
                     : "الرسالة يجب ألا تقل عن 20 حرف",
               },
             }}
             render={({ field: { onChange, value } }) => (
               <TextInput
-                placeholder={lang === "en" ? "Message" : "الرسالة"}
+                placeholder={language === "en" ? "Message" : "الرسالة"}
                 value={value}
                 onChangeText={onChange}
                 multiline
@@ -206,7 +207,7 @@ export default function ContactScreen() {
             className="bg-[#309255] py-4 rounded-lg"
           >
             <Text className="text-white text-lg font-medium text-center">
-              {lang === "en" ? "Send Message" : "إرسال الرسالة"}
+              {language === "en" ? "Send Message" : "إرسال الرسالة"}
             </Text>
           </Pressable>
         </View>
@@ -235,7 +236,7 @@ export default function ContactScreen() {
               }`}
             >
               <Text className="text-white font-medium">
-                {lang === "en" ? "OK" : "حسناً"}
+                {language === "en" ? "OK" : "حسناً"}
               </Text>
             </Pressable>
           </View>

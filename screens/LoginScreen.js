@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -12,11 +12,12 @@ import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { useLanguage } from "../context/LanguageContext"; // عدل المسار
+import { LanguageContext } from 'context/LanguageContext';
+
 import loginimg from "../assets/login.png";
 
 export default function LoginScreen() {
-  const { lang } = useLanguage();
+  const { language } =useContext(LanguageContext);
   const navigation = useNavigation();
 
   const {
@@ -42,13 +43,13 @@ export default function LoginScreen() {
         await AsyncStorage.setItem("token", token);
         await AsyncStorage.setItem("userData", JSON.stringify(userData));
 
-        navigation.navigate("Home"); // اسم الشاشة الرئيسية
+        navigation.navigate("Home"); 
       }
     } catch (error) {
       Alert.alert(
-        lang === "en" ? "Login Failed" : "فشل تسجيل الدخول",
+        language === "en" ? "Login Failed" : "فشل تسجيل الدخول",
         error.response?.data?.message ||
-          (lang === "en"
+          (language === "en"
             ? "Invalid email or password"
             : "البريد الإلكتروني أو كلمة المرور غير صحيحة")
       );
@@ -62,16 +63,16 @@ export default function LoginScreen() {
         {/* IMAGE */}
         <Image
           source={loginimg}
-          className="w-64 h-64 mb-6"
+          className="w-5 h-5" 
           resizeMode="contain"
         />
 
         {/* TITLE */}
         <View className="mb-6">
           <Text className="text-[30px] font-medium text-center text-[#212832]">
-            {lang === "en" ? "Login " : "سجل "}
+            {language === "en" ? "Login " : "سجل "}
             <Text className="text-[#309255]">
-              {lang === "en" ? "Now" : "الآن"}
+              {language === "en" ? "Now" : "الآن"}
             </Text>
           </Text>
         </View>
@@ -135,14 +136,14 @@ export default function LoginScreen() {
             className="bg-[#309255] py-4 rounded-lg"
           >
             <Text className="text-white text-lg font-medium text-center">
-              {lang === "en" ? "Login" : "تسجيل الدخول"}
+              {language === "en" ? "Login" : "تسجيل الدخول"}
             </Text>
           </Pressable>
 
           {/* GOOGLE */}
           <Pressable className="bg-[#e7f8ee] border border-[rgba(48,146,85,0.2)] py-4 rounded-lg">
             <Text className="text-[#309255] text-lg font-medium text-center">
-              {lang === "en" ? "Login with Google" : "الدخول عبر جوجل"}
+              {language === "en" ? "Login with Google" : "الدخول عبر جوجل"}
             </Text>
           </Pressable>
 

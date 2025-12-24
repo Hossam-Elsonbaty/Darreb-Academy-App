@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   View,
   Text,
@@ -11,12 +11,13 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
-import { useLanguage } from "../context/LanguageContext"; 
+
 import loginimg from "../assets/login.png";
+import { LanguageContext } from 'context/LanguageContext';
 
 export default function RegisterScreen() {
   const navigation = useNavigation();
-  const { lang } = useLanguage();
+  const { language } =useContext(LanguageContext);
 
   const {
     control,
@@ -31,8 +32,8 @@ export default function RegisterScreen() {
   const onSubmit = async (data) => {
     if (data.password !== data.confirmPassword) {
       Alert.alert(
-        lang === "en" ? "Error" : "خطأ",
-        lang === "en"
+        language === "en" ? "Error" : "خطأ",
+        language === "en"
           ? "Password and Confirm Password must be the same"
           : "كلمة المرور غير متطابقة"
       );
@@ -54,9 +55,9 @@ export default function RegisterScreen() {
       }
     } catch (error) {
       Alert.alert(
-        lang === "en" ? "Error" : "خطأ",
+        language === "en" ? "Error" : "خطأ",
         error.response?.data?.message ||
-          (lang === "en"
+          (language === "en"
             ? "Something went wrong"
             : "حدث خطأ، حاول مرة أخرى")
       );
@@ -77,9 +78,9 @@ export default function RegisterScreen() {
         {/* TITLE */}
         <View className="mb-6">
           <Text className="text-[30px] font-medium text-center text-[#212832]">
-            {lang === "en" ? "Registration " : "سجل "}
+            {language === "en" ? "Registration " : "سجل "}
             <Text className="text-[#309255]">
-              {lang === "en" ? "Now" : "الآن"}
+              {language === "en" ? "Now" : "الآن"}
             </Text>
           </Text>
         </View>
@@ -191,7 +192,7 @@ export default function RegisterScreen() {
             }`}
           >
             <Text className="text-white text-lg font-medium text-center">
-              {lang === "en" ? "Create an account" : "إنشاء حساب"}
+              {language === "en" ? "Create an account" : "إنشاء حساب"}
             </Text>
           </Pressable>
 

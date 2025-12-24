@@ -1,4 +1,4 @@
-import { View, Text, Button, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { LanguageContext } from 'context/LanguageContext';
