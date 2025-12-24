@@ -3,11 +3,13 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Image, Switch, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useLanguage } from '../context/LanguageContext';
-
+import AntDesign from '@expo/vector-icons/AntDesign';
 import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import ContactScreen from '../screens/ContactScreen';
 import { t } from 'i18next';
+import Cart from 'screens/Cart';
+import Wishlist from 'screens/Wishlist';
 
 const Drawer = createDrawerNavigator();
 
@@ -46,6 +48,7 @@ export default function DrawerNavigator() {
           ),
         }}
       />
+  
 
       <Drawer.Screen
         name="About"
@@ -65,6 +68,27 @@ export default function DrawerNavigator() {
           title: links[2],
           drawerIcon: ({ color, size }) => (
             <Ionicons name="mail-outline" size={size} color={color} />
+          ),
+        }}
+      />
+          <Drawer.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          title: links[3],
+          drawerIcon: ({ color, size }) => (
+            <AntDesign name="shopping-cart" size={size} color={color} />
+
+          ),
+        }}
+      />
+          <Drawer.Screen
+        name="Wishlist"
+        component={Wishlist}
+        options={{
+          title: links[4],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="heart-outline" size={size} color={color} />
           ),
         }}
       />
