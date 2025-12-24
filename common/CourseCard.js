@@ -38,7 +38,7 @@ export default function CourseCard({ c, status }) {
     <View className="mb-10 rounded-2xl border border-main bg-white shadow-md">
       {/* Course Image */}
       <View className="overflow-hidden rounded-xl p-3">
-        <Image source={courseImg} contentFit="cover" style={{ height: 200, width: '100%' }} />
+        <Image source={courseImg} contentFit="cover" style={{ height: 200 }} />
       </View>
 
       {/* Instructor + Category */}
