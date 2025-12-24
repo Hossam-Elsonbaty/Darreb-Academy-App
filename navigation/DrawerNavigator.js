@@ -7,7 +7,9 @@ import { useLanguage } from '../context/LanguageContext';
 import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import ContactScreen from '../screens/ContactScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import { t } from 'i18next';
+import LoginScreen from 'screens/LoginScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -47,6 +49,7 @@ export default function DrawerNavigator() {
         }}
       />
 
+
       <Drawer.Screen
         name="About"
         component={AboutScreen}
@@ -68,6 +71,25 @@ export default function DrawerNavigator() {
           ),
         }}
       />
+      <Drawer.Screen
+      name="Register"
+      component={RegisterScreen}
+      options={{
+        title: links[3],
+        drawerIcon: ({ color, size }) => (
+          <Ionicons name="log-in-outline" size={size} color={color} />
+        ),
+      }}  />
+
+      <Drawer.Screen
+        name="signin"
+        component={LoginScreen}
+        options={{
+          title: links[4],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="log-in-outline" size={size} color={color} />
+          ),
+        }}  />
     </Drawer.Navigator>
   );
 }
