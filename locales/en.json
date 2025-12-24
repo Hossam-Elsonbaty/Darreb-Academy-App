@@ -2,7 +2,7 @@
   "home": "Home Screen",
   "about": "About Screen",
 
-  "links": ["Home", "About", "Contact"],
+  "links": ["Home", "About", "Contact", "After Enroll"],
   "hero": {
     "subTitle": "Start your favorite course",
     "desc": "It has survived not only five centuries but also the leap into electronic typesetting.",
@@ -498,5 +498,27 @@
 
       "instructor": "John Doe"
     }
-  ]
+  ],
+
+  "enroll": {
+    "links": ["Overview", "Description", "Certificates", "Instructor"],
+    "content": [
+      {
+        "role": "Overview",
+        "title": "content of overview"
+      },
+      {
+        "role": "Description",
+        "title": "content of description"
+      },
+      {
+        "role": "Certificates",
+        "title": "content of Certificates"
+      },
+      {
+        "role": "Instructor",
+        "title": "content of Instructor"
+      }
+    ]
+  }
 }
