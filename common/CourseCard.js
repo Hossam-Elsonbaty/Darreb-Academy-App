@@ -1,7 +1,9 @@
-import { View, Text, Pressable, Image } from 'react-native';
+import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useMemo } from 'react';
 import { useLanguage } from 'context/LanguageContext';
+import { useCart } from '../context/CartContext';
+import { useWishlist } from 'context/WishlistContext';
 
 const coursesImages = [
   require('../assets/courses-01.jpg'),
@@ -23,8 +25,11 @@ const profileImages = [
 
 export default function CourseCard({ c, status }) {
   const { language } = useLanguage();
+  // const { addToCart,cartItems } = useCart();
+  const { addToCart, isInCart, removeFromCart } = useCart();
   const isRTL = language === 'ar';
-
+  const { addToWishlist, isInWishlist, removeFromWishlist } = useWishlist();
+  // const isInCart = cartItems.some(item => item.course._id === c._id || item.course.id === c.id);
   const courseImg = useMemo(
     () => coursesImages[Math.floor(Math.random() * coursesImages.length)],
     []
@@ -33,14 +38,64 @@ export default function CourseCard({ c, status }) {
     () => profileImages[Math.floor(Math.random() * profileImages.length)],
     []
   );
-
+  // const handleAddToCart = async () => {
+  //   if (!isInCart) {
+  //     await addToCart({ ...c, thumbnail: courseImg });
+  //     console.log('added to cart');
+  //   }
+  //   navigation.navigate('Cart');
+  // };
   return (
     <View className="mb-10 rounded-2xl border border-main bg-white shadow-md">
       {/* Course Image */}
-      <View className="overflow-hidden rounded-xl p-3">
-        <Image source={courseImg} contentFit="cover" style={{ height: 200 }} />
+      {/*</View><View className="overflow-hidden rounded-xl p-3">
+        <Image source={courseImg} contentFit="cover" style={{ height: 200 }} />*/}
+      <View className="relative overflow-hidden rounded-xl ">
+        <Image source={courseImg} contentFit="cover" style={{ height: 200, width: '100%' }} />
       </View>
+      <View className="absolute right-0 top-2 flex flex-col gap-2">
+        <TouchableOpacity
+          className="rounded-full bg-white p-2 shadow"
+          onPress={() => {
+            if (isInWishlist(c.id)) {
+              removeFromWishlist(c.id);
+            } else {
+              addToWishlist({ ...c, image: courseImg, instructorImage: profileImg, price: 385 });
+            }
+          }}>
+          <Ionicons
+            name={isInWishlist(c.id) ? 'heart' : 'heart-outline'}
+            size={20}
+            color={isInWishlist(c.id) ? '#f00' : '#999'}
+          />
+        </TouchableOpacity>
+        {/* <TouchableOpacity
+           onPress={handleAddToCart}
+          className="rounded-full bg-white p-2 shadow">
+          <Ionicons name="cart-outline" size={20} color="#309255" />
+        </TouchableOpacity> */}
 
+        <TouchableOpacity
+          className="rounded-full bg-white p-2 shadow"
+          onPress={() => {
+            if (isInCart(c.id)) {
+              removeFromCart(c.id);
+            } else {
+              addToCart({
+                ...c,
+                image: courseImg,
+                price: 385,
+                instructorImage: profileImg,
+              });
+            }
+          }}>
+          <Ionicons
+            name={isInCart(c.id) ? 'cart' : 'cart-outline'}
+            size={20}
+            color={isInCart(c.id) ? '#309255' : '#999'}
+          />
+        </TouchableOpacity>
+      </View>
       {/* Instructor + Category */}
       <View
         className="mt-2 flex-row items-center justify-between p-3"
@@ -160,7 +215,7 @@ export default function CourseCard({ c, status }) {
           </View>
 
           <View
-            className="flex-row items-center gap-1"
+            className="flex-row  items-center gap-1"
             style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
             <Text
               className="font-medium text-dark"
