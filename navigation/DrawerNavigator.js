@@ -11,6 +11,7 @@ import { t } from 'i18next';
 import AfterEnroll from 'screens/AfterEnroll';
 import Cart from 'screens/Cart';
 import Wishlist from 'screens/Wishlist';
+import CoursesScreen from '../screens/CoursesScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -71,11 +72,20 @@ export default function DrawerNavigator() {
             <Ionicons name="mail-outline" size={size} color={color} />
           ),
         }}
+        
       />
 
        <Drawer.Screen
         name="Enroll"
         component={AfterEnroll}
+        options={{
+          title: links[3],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="mail-outline" size={size} color={color} />
+          ),}}/>
+        <Drawer.Screen
+        name="Courses"
+        component={CoursesScreen}
         options={{
           title: links[3],
           drawerIcon: ({ color, size }) => (
