@@ -4,32 +4,26 @@ import { useMemo } from 'react';
 import { useLanguage } from 'context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from 'context/WishlistContext';
-
-const coursesImages = [
-  require('../assets/courses-01.jpg'),
-  require('../assets/courses-02.jpg'),
-  require('../assets/courses-03.jpg'),
-  require('../assets/courses-04.jpg'),
-  require('../assets/courses-05.jpg'),
-  require('../assets/courses-06.jpg'),
-];
-
 const profileImages = [
-  require('../assets/author-01.jpg'),
-  require('../assets/author-02.jpg'),
-  require('../assets/author03.jpg'),
-  require('../assets/author-04.jpg'),
-  require('../assets/author-05.jpg'),
-  require('../assets/author-06.jpg'),
+  require('../../assets/images/profile1.jpg'),
+  require('../../assets/images/profile2.jpg'),
+  require('../../assets/images/profile3.jpg'),
+  require('../../assets/images/profile4.jpg'),
+  require('../../assets/images/profile5.jpg'),
 ];
-
+const coursesImages = [
+  require('../../assets/images/course1.jpg'),
+  require('../../assets/images/course2.jpg'),
+  require('../../assets/images/course3.jpg'),
+  require('../../assets/images/course4.jpg'),
+  require('../../assets/images/course5.jpg'),
+];
 export default function CourseCard({ c, status }) {
   const { language } = useLanguage();
-  // const { addToCart,cartItems } = useCart();
-  const { addToCart, isInCart, removeFromCart } = useCart();
   const isRTL = language === 'ar';
+  const { addToCart, isInCart, removeFromCart } = useCart();
   const { addToWishlist, isInWishlist, removeFromWishlist } = useWishlist();
-  // const isInCart = cartItems.some(item => item.course._id === c._id || item.course.id === c.id);
+  const courseImage = useMemo(() => ({ uri: c.thumbnail }), [c.thumbnail]);
   const courseImg = useMemo(
     () => coursesImages[Math.floor(Math.random() * coursesImages.length)],
     []
@@ -38,59 +32,41 @@ export default function CourseCard({ c, status }) {
     () => profileImages[Math.floor(Math.random() * profileImages.length)],
     []
   );
-  // const handleAddToCart = async () => {
-  //   if (!isInCart) {
-  //     await addToCart({ ...c, thumbnail: courseImg });
-  //     console.log('added to cart');
-  //   }
-  //   navigation.navigate('Cart');
-  // };
   return (
     <View className="mb-10 rounded-2xl border border-main bg-white ">
       {/* Course Image */}
       <View className="overflow-hidden rounded-xl p-3">
-        <Image source={courseImg} contentFit="cover" style={{ height: 200 }} />
+        <Image source={courseImage} contentFit="cover" style={{ height: 200 }} />
       </View>
       <View className="absolute right-0 top-2 flex flex-col gap-2">
         <TouchableOpacity
           className="rounded-full bg-white p-2 "
           onPress={() => {
-            if (isInWishlist(c.id)) {
-              removeFromWishlist(c.id);
+            if (isInWishlist(c._id)) {
+              removeFromWishlist(c._id);
             } else {
-              addToWishlist({ ...c, image: courseImg, instructorImage: profileImg, price: 385 });
+              addToWishlist(c);
             }
           }}>
           <Ionicons
-            name={isInWishlist(c.id) ? 'heart' : 'heart-outline'}
+            name={isInWishlist(c._id) ? 'heart' : 'heart-outline'}
             size={20}
-            color={isInWishlist(c.id) ? '#f00' : '#999'}
+            color={isInWishlist(c._id) ? '#f00' : '#999'}
           />
         </TouchableOpacity>
-        {/* <TouchableOpacity
-           onPress={handleAddToCart}
-          className="rounded-full bg-white p-2 shadow">
-          <Ionicons name="cart-outline" size={20} color="#309255" />
-        </TouchableOpacity> */}
-
         <TouchableOpacity
           className="rounded-full bg-white p-2 "
           onPress={() => {
-            if (isInCart(c.id)) {
-              removeFromCart(c.id);
+            if (isInCart(c._id)) {
+              removeFromCart(c._id);
             } else {
-              addToCart({
-                ...c,
-                image: courseImg,
-                price: 385,
-                instructorImage: profileImg,
-              });
+              addToCart(c);
             }
           }}>
           <Ionicons
-            name={isInCart(c.id) ? 'cart' : 'cart-outline'}
+            name={isInCart(c._id) ? 'cart' : 'cart-outline'}
             size={20}
-            color={isInCart(c.id) ? '#309255' : '#999'}
+            color={isInCart(c._id) ? '#309255' : '#999'}
           />
         </TouchableOpacity>
       </View>
@@ -105,7 +81,7 @@ export default function CourseCard({ c, status }) {
         />
         <View className="flex-1 font-medium" style={{ paddingHorizontal: 12 }}>
           <Text className="text-center text-gray" style={{ textAlign: isRTL ? 'right' : 'left' }}>
-            {c.instructor}
+            {c.instructor?.fullName || ''}
           </Text>
         </View>
 
@@ -113,7 +89,7 @@ export default function CourseCard({ c, status }) {
           <Text
             className="text-sm font-medium text-main"
             style={{ textAlign: isRTL ? 'right' : 'left' }}>
-            {c.category}
+            {c.category?.name || (language === 'en' ? 'All' : 'جميع الفئات')}
           </Text>
         </View>
       </View>
@@ -156,7 +132,7 @@ export default function CourseCard({ c, status }) {
                   marginLeft: isRTL ? 0 : 8,
                   marginRight: isRTL ? 8 : 0,
                 }}>
-                {c.time}
+                {c.totalDuration || '—'}
               </Text>
             </>
           )}
@@ -186,7 +162,7 @@ export default function CourseCard({ c, status }) {
                   marginLeft: isRTL ? 0 : 8,
                   marginRight: isRTL ? 8 : 0,
                 }}>
-                {c.lectures}
+                {c.totalLectures || 0}
               </Text>
             </>
           )}
@@ -201,15 +177,7 @@ export default function CourseCard({ c, status }) {
           <View
             className="flex-row items-center"
             style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-            <Text className="text-xl font-bold text-main">$385.00</Text>
-            <Text
-              className="text-gray line-through"
-              style={{
-                marginLeft: isRTL ? 0 : 8,
-                marginRight: isRTL ? 8 : 0,
-              }}>
-              $440.00
-            </Text>
+            <Text className="text-xl font-bold text-main">${c.price}</Text>
           </View>
 
           <View
@@ -221,12 +189,12 @@ export default function CourseCard({ c, status }) {
                 marginLeft: isRTL ? 4 : 0,
                 marginRight: isRTL ? 0 : 4,
               }}>
-              4.9
+              {c.totalRatings || 0}
             </Text>
             {[1, 2, 3, 4, 5].map((i) => (
               <Ionicons
                 key={i}
-                name={i <= Math.round(c.rating) ? 'star' : 'star-outline'}
+                name={i <= Math.round(c.totalRatings) ? 'star' : 'star-outline'}
                 size={14}
                 color="#facc15"
               />
