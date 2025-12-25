@@ -46,16 +46,14 @@ export default function CourseCard({ c, status }) {
   //   navigation.navigate('Cart');
   // };
   return (
-    <View className="mb-10 rounded-2xl border border-main bg-white shadow-md">
+    <View className="mb-10 rounded-2xl border border-main bg-white ">
       {/* Course Image */}
-      {/*</View><View className="overflow-hidden rounded-xl p-3">
-        <Image source={courseImg} contentFit="cover" style={{ height: 200 }} />*/}
-      <View className="relative overflow-hidden rounded-xl ">
-        <Image source={courseImg} contentFit="cover" style={{ height: 200, width: '100%' }} />
+      <View className="overflow-hidden rounded-xl p-3">
+        <Image source={courseImg} contentFit="cover" style={{ height: 200 }} />
       </View>
       <View className="absolute right-0 top-2 flex flex-col gap-2">
         <TouchableOpacity
-          className="rounded-full bg-white p-2 shadow"
+          className="rounded-full bg-white p-2 "
           onPress={() => {
             if (isInWishlist(c.id)) {
               removeFromWishlist(c.id);
@@ -76,7 +74,7 @@ export default function CourseCard({ c, status }) {
         </TouchableOpacity> */}
 
         <TouchableOpacity
-          className="rounded-full bg-white p-2 shadow"
+          className="rounded-full bg-white p-2 "
           onPress={() => {
             if (isInCart(c.id)) {
               removeFromCart(c.id);
