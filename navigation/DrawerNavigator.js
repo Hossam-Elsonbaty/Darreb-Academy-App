@@ -7,11 +7,13 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import HomeScreen from '../screens/HomeScreen';
 import AboutScreen from '../screens/AboutScreen';
 import ContactScreen from '../screens/ContactScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import { t } from 'i18next';
-import AfterEnroll from 'screens/AfterEnroll';
-import Cart from 'screens/Cart';
-import Wishlist from 'screens/Wishlist';
+import AfterEnroll from '../screens/AfterEnroll';
+import Cart from '../screens/Cart';
+import Wishlist from '../screens/Wishlist';
 import CoursesScreen from '../screens/CoursesScreen';
+import LoginScreen from '../screens/LoginScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -51,6 +53,7 @@ export default function DrawerNavigator() {
         }}
       />
   
+
 
       <Drawer.Screen
         name="About"
@@ -112,6 +115,25 @@ export default function DrawerNavigator() {
           ),
         }}
       />
+      <Drawer.Screen
+      name="Register"
+      component={RegisterScreen}
+      options={{
+        title: links[3],
+        drawerIcon: ({ color, size }) => (
+          <Ionicons name="log-in-outline" size={size} color={color} />
+        ),
+      }}  />
+
+      <Drawer.Screen
+        name="signin"
+        component={LoginScreen}
+        options={{
+          title: links[4],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="log-in-outline" size={size} color={color} />
+          ),
+        }}  />
     </Drawer.Navigator>
   );
 }

@@ -2,12 +2,15 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import { LanguageProvider } from './context/LanguageContext';
+import Toast from "react-native-toast-message";
+
 import './global.css';
 import { CartProvider } from './context/CartContext';
 import { WishlistProvider } from 'context/WishlistContext';
 
 export default function App() {
   return (
+    <>
     <LanguageProvider>
         <WishlistProvider>
       <CartProvider>
@@ -17,5 +20,9 @@ export default function App() {
       </CartProvider>
       </WishlistProvider>
     </LanguageProvider>
+          
+          <Toast /> 
+    </>
+
   );
 }
