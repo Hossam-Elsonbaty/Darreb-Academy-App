@@ -8,32 +8,47 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, { useContext, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { LanguageContext } from 'context/LanguageContext';
 import SectionTitle from 'common/SectionTitle';
 import { Ionicons } from '@expo/vector-icons';
 import CourseCard from 'common/CourseCard';
+import api from '../../api/axios';
 
 export default function Courses() {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
   const { language } = useContext(LanguageContext);
-  const { title, cards } = t('courses', { returnObjects: true });
-
-  const [cate, setCate] = useState(`${language === 'en' ? 'UX/UI Design' : 'تصميم UX/UI'}`);
+  const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [cate, setCate] = useState('');
   const [searchItem, setSearchItem] = useState('');
+  const fetchCourses = async () => {
+    try {
+      const res = await api.get('/courses');
+      setCourses(res.data);
 
-  // Filter cards based on category and search term
-  const filteredCards = cards.filter((c) => {
-    const matchesCategory = c.category.toLowerCase() === cate.toLowerCase();
+      const cats = [...new Set(res.data.map((c) => c.category))];
+      setCategories(cats);
+      if (cats.length > 0) setCate(cats[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [language]);
+  const filteredCourses = courses.filter((c) => {
+    const matchesCategory = c.category === cate;
     const matchesSearch = c.title.toLowerCase().includes(searchItem.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-  useEffect(() => {
-    setCate(language === 'en' ? 'UX/UI Design' : 'تصميم UX/UI');
-  }, [language]);
+  const isRTL = language === 'ar';
+
+  // useEffect(() => {
+  //   setCate(language === 'en' ? 'UX/UI Design' : 'تصميم UX/UI');
+  // }, [language]);
   return (
-    <View className={` bg-white px-4 ${language === 'en' ? 'items-start' : 'items-end '}`}>
+    <View className={` bg-white px-4 ${isRTL ? 'items-end' : 'items-start'}`}>
       <SectionTitle
         title={
           language === 'en' ? (
@@ -59,7 +74,7 @@ export default function Courses() {
           value={searchItem}
           onChangeText={setSearchItem}
           inputMode="search"
-          placeholder="Search..."
+          placeholder={language === 'en' ? 'Search...' : 'بحث...'}
           placeholderTextColor="#9CA3AF"
           className="text-gray-900 ml-3 flex-1 dark:text-white"
           returnKeyType="search"
@@ -75,7 +90,7 @@ export default function Courses() {
 
       {/* Scrolled Links title */}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-4">
-        {title.map((cat) => {
+        {categories.map((cat) => {
           const isActive = cate === cat;
 
           return (
@@ -86,7 +101,7 @@ export default function Courses() {
                 isActive ? 'border-main bg-main/10' : 'border-lightGreen bg-white'
               }`}>
               <Text className={`text-lg ${isActive ? 'font-medium text-main' : 'text-gray-700'}`}>
-                {cat}
+                {isRTL ? cat.name_ar : cat.name}
               </Text>
             </Pressable>
           );
@@ -95,8 +110,8 @@ export default function Courses() {
 
       {/* Cards */}
       <FlatList
-        data={filteredCards}
-        keyExtractor={(item) => item.id.toString()}
+        data={filteredCourses}
+        keyExtractor={(item) => item._id}
         ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
         renderItem={({ item }) => <CourseCard c={item} />}
         contentContainerStyle={{
