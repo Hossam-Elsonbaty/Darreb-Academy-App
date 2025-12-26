@@ -5,18 +5,18 @@ import { useLanguage } from 'context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from 'context/WishlistContext';
 const profileImages = [
-  require('../../assets/images/profile1.jpg'),
-  require('../../assets/images/profile2.jpg'),
-  require('../../assets/images/profile3.jpg'),
-  require('../../assets/images/profile4.jpg'),
-  require('../../assets/images/profile5.jpg'),
+  require('../assets/author-01.jpg'),
+  require('../assets/author-02.jpg'),
+  require('../assets/author-04.jpg'),
+  require('../assets/author-05.jpg'),
+  require('../assets/author-06.jpg'),
 ];
 const coursesImages = [
-  require('../../assets/images/course1.jpg'),
-  require('../../assets/images/course2.jpg'),
-  require('../../assets/images/course3.jpg'),
-  require('../../assets/images/course4.jpg'),
-  require('../../assets/images/course5.jpg'),
+  require('../assets/courses-01.jpg'),
+  require('../assets/courses-02.jpg'),
+  require('../assets/courses-03.jpg'),
+  require('../assets/courses-04.jpg'),
+  require('../assets/courses-05.jpg'),
 ];
 export default function CourseCard({ c, status }) {
   const { language } = useLanguage();
@@ -33,7 +33,7 @@ export default function CourseCard({ c, status }) {
     []
   );
   return (
-    <View className="mb-10 rounded-2xl border border-main bg-white ">
+    <View className="mb-10 rounded-2xl border border-main bg-white min-w-64">
       {/* Course Image */}
       <View className="overflow-hidden rounded-xl p-3">
         <Image source={courseImage} contentFit="cover" style={{ height: 200 }} />
@@ -106,25 +106,11 @@ export default function CourseCard({ c, status }) {
 
       {/* Info Row */}
       <View
-        className="mt-4 flex-row items-center justify-between px-3 text-sm"
+        className="mt-4 flex-row items-center gap-8 px-3 text-sm"
         style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
         <View
           className="flex-row items-center gap-2"
           style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-          {status === 'news' ? (
-            <>
-              <Ionicons name="calendar-outline" size={18} color="#309255" />
-              <Text
-                className="text-gray"
-                style={{
-                  marginLeft: isRTL ? 0 : 8,
-                  marginRight: isRTL ? 8 : 0,
-                }}>
-                21 March, 2021
-              </Text>
-            </>
-          ) : (
-            <>
               <Ionicons name="time-outline" size={18} color="#309255" />
               <Text
                 className="text-gray"
@@ -134,27 +120,10 @@ export default function CourseCard({ c, status }) {
                 }}>
                 {c.totalDuration || '—'}
               </Text>
-            </>
-          )}
         </View>
-
         <View
           className="flex-row items-center gap-1"
           style={{ flexDirection: isRTL ? 'row-reverse' : 'row' }}>
-          {status === 'news' ? (
-            <>
-              <Ionicons name="heart-outline" size={18} color="#309255" />
-              <Text
-                className="text-gray"
-                style={{
-                  marginLeft: isRTL ? 0 : 8,
-                  marginRight: isRTL ? 8 : 0,
-                }}>
-                2,568+
-              </Text>
-            </>
-          ) : (
-            <>
               <Ionicons name="book-outline" size={18} color="#309255" />
               <Text
                 className="text-gray"
@@ -162,10 +131,8 @@ export default function CourseCard({ c, status }) {
                   marginLeft: isRTL ? 0 : 8,
                   marginRight: isRTL ? 8 : 0,
                 }}>
-                {c.totalLectures || 0}
+                {`${c.totalLectures} Lectures` || 0}
               </Text>
-            </>
-          )}
         </View>
       </View>
 

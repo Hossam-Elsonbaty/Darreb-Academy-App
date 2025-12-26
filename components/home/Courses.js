@@ -48,7 +48,7 @@ export default function Courses() {
   //   setCate(language === 'en' ? 'UX/UI Design' : 'تصميم UX/UI');
   // }, [language]);
   return (
-    <View className={` bg-white px-4 ${isRTL ? 'items-end' : 'items-start'}`}>
+    <View className={` bg-white px-4 items-center`}>
       <SectionTitle
         title={
           language === 'en' ? (

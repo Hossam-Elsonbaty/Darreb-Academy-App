@@ -23,7 +23,7 @@ export default function Wishlist() {
       {wishlist.map(item => (
         <View
           key={item._id}
-          className="mb-6 rounded-2xl border border-gray-200 bg-white shadow-md"
+          className="mb-6 rounded-2xl border border-gray-200 bg-white shadow-md border-[#ddd]"
         >
           <Image
             source={{ uri: item.course.thumbnail }}
@@ -40,9 +40,9 @@ export default function Wishlist() {
               {item.course.instructor?.fullName}
             </Text>
 
-            <Text className="mt-1 text-center text-gray-500">
+            {/* <Text className="mt-1 text-center text-gray-500">
               {item.course.totalDuration} • {item.course.totalLectures}
-            </Text>
+            </Text> */}
 
             <Text className="mt-3 text-center text-xl font-bold text-main">
               £E{item.course.price}

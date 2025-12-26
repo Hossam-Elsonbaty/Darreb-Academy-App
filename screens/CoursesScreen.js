@@ -7,8 +7,8 @@ import { useContext, useEffect, useState,  } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Ionicons } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
-import CourseCard from "common/CourseCard";
-import ScreenWrapper from "components/WrapperScreen";
+import CourseCard from "../common/CourseCard";
+import ScreenWrapper from "../components/WrapperScreen";
 
 
 export default function CoursesScreen() {

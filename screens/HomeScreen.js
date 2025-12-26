@@ -12,7 +12,7 @@ export default function HomeScreen() {
       <Courses />
       <Works />
       <Testimonials />
-      <News />
+      {/* <News /> */}
     </ScreenWrapper>
   );
 }
