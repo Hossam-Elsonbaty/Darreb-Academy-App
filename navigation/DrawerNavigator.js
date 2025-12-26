@@ -9,8 +9,20 @@ import AboutScreen from '../screens/AboutScreen';
 import ContactScreen from '../screens/ContactScreen';
 import { t } from 'i18next';
 import CoursesScreen from '../screens/CoursesScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import CourseDetails from 'screens/CourseDetails';
 
 const Drawer = createDrawerNavigator();
+const Stack = createNativeStackNavigator();
+
+function CoursesStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Courses" component={CoursesScreen}    />
+      <Stack.Screen name="CourseDetails" component={CourseDetails}  />
+    </Stack.Navigator>
+  );
+}
 
 export default function DrawerNavigator() {
   const { language, toggleLanguage } = useLanguage();
@@ -70,7 +82,7 @@ export default function DrawerNavigator() {
         }}
         
       />
-        <Drawer.Screen
+        {/* <Drawer.Screen
         name="Courses"
         component={CoursesScreen}
         options={{
@@ -78,7 +90,18 @@ export default function DrawerNavigator() {
           drawerIcon: ({ color, size }) => (
             <Ionicons name="mail-outline" size={size} color={color} />
           ),
-        }}/>
+        }}/> */}
+        <Drawer.Screen
+  name="Courses"
+  component={CoursesStack}
+  options={{
+    title: links[3],
+    drawerIcon: ({ color, size }) => (
+      <Ionicons name="book-outline" size={size} color={color} />
+    ),
+  }}
+/>
+
     </Drawer.Navigator>
   );
 }

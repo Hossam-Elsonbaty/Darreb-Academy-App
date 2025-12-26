@@ -2,6 +2,7 @@ import { View, Text, Pressable, Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useMemo } from 'react';
 import { useLanguage } from 'context/LanguageContext';
+import { useNavigation } from '@react-navigation/native';
 
 const coursesImages = [
   require('../assets/courses-01.jpg'),
@@ -33,8 +34,21 @@ export default function CourseCard({ c, status }) {
     () => profileImages[Math.floor(Math.random() * profileImages.length)],
     []
   );
+  const navigation = useNavigation();
+// console.log(navigation.getState());
 
   return (
+     <Pressable
+      onPress={() =>
+        navigation.navigate('CourseDetails', {
+          course: c,
+          status,
+        })
+      }
+      className="mb-10 rounded-2xl border border-main bg-white shadow-md active:opacity-90"
+    >
+
+    
     <View className="mb-10 rounded-2xl border border-main bg-white shadow-md">
       {/* Course Image */}
       <View className="overflow-hidden rounded-xl p-3">
@@ -195,5 +209,6 @@ export default function CourseCard({ c, status }) {
         </Pressable>
       )}
     </View>
+    </Pressable>
   );
 }
