@@ -11,6 +11,8 @@ const profileImages = [
   require('../assets/author-05.jpg'),
   require('../assets/author-06.jpg'),
 ];
+import { useNavigation } from '@react-navigation/native';
+
 const coursesImages = [
   require('../assets/courses-01.jpg'),
   require('../assets/courses-02.jpg'),
@@ -32,8 +34,18 @@ export default function CourseCard({ c, status }) {
     () => profileImages[Math.floor(Math.random() * profileImages.length)],
     []
   );
+  const navigation = useNavigation();
   return (
-    <View className="mb-10 rounded-2xl border border-main bg-white min-w-64">
+     <Pressable
+      onPress={() =>
+        navigation.navigate('CourseDetails', {
+          course: c,
+          status,
+        })
+      }
+      className="mb-10 rounded-2xl border border-main bg-white shadow-md active:opacity-90">
+    
+    <View className="mb-10 rounded-2xl border border-main bg-white shadow-md">
       {/* Course Image */}
       <View className="overflow-hidden rounded-xl p-3">
         <Image source={courseImage} contentFit="cover" style={{ height: 200 }} />
@@ -183,5 +195,6 @@ export default function CourseCard({ c, status }) {
         </Pressable>
       )}
     </View>
+    </Pressable>
   );
 }

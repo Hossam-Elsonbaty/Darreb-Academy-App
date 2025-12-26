@@ -39,7 +39,7 @@ export default function CoursesScreen() {
  
     return (
        <>
-       <ScreenWrapper>
+       <>
             {/* =============== Hero Section ================*/}
       <View className=" h-[30vh] justify-center bg-lightGreen px-6">
         {/* Content */}
@@ -167,7 +167,7 @@ export default function CoursesScreen() {
       </View>
 
 
-    </ScreenWrapper>
+    </>
       
        </>
     );
