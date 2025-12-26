@@ -92,18 +92,18 @@ export const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const addToWishlist = (course) => {
-    setWishlistItems((prev) => {
-      if (prev.some((item) => item.id === course.id)) return prev;
-      return [...prev, course];
-    });
-  };
+  // const addToWishlist = (course) => {
+  //   setWishlistItems((prev) => {
+  //     if (prev.some((item) => item.id === course.id)) return prev;
+  //     return [...prev, course];
+  //   });
+  // };
 
-  const removeFromWishlist = (id) => {
-    setWishlistItems((prev) => prev.filter((item) => item.id !== id));
-  };
+  // const removeFromWishlist = (id) => {
+  //   setWishlistItems((prev) => prev.filter((item) => item.id !== id));
+  // };
 
-  const isInWishlist = (id) => wishlistItems.some((item) => item.id === id);
+  // const isInWishlist = (id) => wishlistItems.some((item) => item.id === id);
 
   const getWishlist = async () => {
     try {
@@ -123,7 +123,6 @@ export const WishlistProvider = ({ children }) => {
 
   const addToWishlist = async (course) => {
     setWishlist((prev) => [...prev, { course }]);
-
     try {
       await api.post('/wishlist', {
         courseId: course._id,
@@ -134,12 +133,11 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const removeFromWishlist = async (courseId) => {
-    setWishlist((prev) =>
-      prev.filter((item) => item.course._id !== courseId)
-    );
-
     try {
       await api.delete(`/wishlist/${courseId}`);
+      setWishlist((prev) =>
+        prev.filter((item) => item.course._id !== courseId)
+      );
     } catch (err) {
       console.log('Remove wishlist error:', err.response?.data || err.message);
     }
