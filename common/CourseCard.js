@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { useLanguage } from 'context/LanguageContext';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from 'context/WishlistContext';
+import { useNavigation } from '@react-navigation/native';
 const profileImages = [
   require('../assets/author-01.jpg'),
   require('../assets/author-02.jpg'),
@@ -11,7 +12,7 @@ const profileImages = [
   require('../assets/author-05.jpg'),
   require('../assets/author-06.jpg'),
 ];
-import { useNavigation } from '@react-navigation/native';
+
 
 const coursesImages = [
   require('../assets/courses-01.jpg'),
@@ -35,12 +36,13 @@ export default function CourseCard({ c, status }) {
     []
   );
   const navigation = useNavigation();
+
   return (
      <Pressable
       onPress={() =>
         navigation.navigate('CourseDetails', {
-          course: c,
-          status,
+      course: c,
+      courseId: c._id,
         })
       }
       className="mb-10 rounded-2xl border border-main bg-white shadow-md active:opacity-90">

@@ -9,6 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { FlatList } from "react-native-gesture-handler";
 import CourseCard from "../common/CourseCard";
 import ScreenWrapper from "../components/WrapperScreen";
+import api from "api/axios";
 
 
 export default function CoursesScreen() {
@@ -16,30 +17,36 @@ export default function CoursesScreen() {
   const { language } = useContext(LanguageContext);
   
   const { t } = useTranslation();
-  
- const { title, cards } = t('courses', { returnObjects: true });
-  const [cate, setCate] = useState(
-    `${language === "en" ? "UX/UI Design" : "تصميم UX/UI"}`
-  );
- const [searchItem, setSearchItem] = useState('');
+  const [courses, setCourses] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [cate, setCate] = useState('');
+  const [searchItem, setSearchItem] = useState('');
+  const fetchCourses = async () => {
+    try {
+      const res = await api.get('/courses');
+      setCourses(res.data);
 
-  // Filter cards based on category and search term
-  const filteredCards = cards.filter((c) => {
-    const matchesCategory = c.category.toLowerCase() === cate.toLowerCase();
+      const cats = [...new Set(res.data.map((c) => c.category))];
+      setCategories(cats);
+      if (cats.length > 0) setCate(cats[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    fetchCourses();
+  }, [language]);
+  const filteredCourses = courses.filter((c) => {
+    const matchesCategory = c.category === cate;
     const matchesSearch = c.title.toLowerCase().includes(searchItem.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 
-
-  
-
-  useEffect(() => {
-    setCate(language === "en" ? "UX/UI Design" : "تصميم UX/UI");
-  }, [language]);
+  const isRTL = language === 'ar';
  
     return (
        <>
-       <>
+       <ScreenWrapper>
             {/* =============== Hero Section ================*/}
       <View className=" h-[30vh] justify-center bg-lightGreen px-6">
         {/* Content */}
@@ -145,9 +152,9 @@ export default function CoursesScreen() {
     </View> 
 
     {/* Cards */}
-    <FlatList
-            data={filteredCards}
-            keyExtractor={(item) => item.id.toString()}
+     <FlatList
+            data={filteredCourses}
+            keyExtractor={(item) => item._id}
             ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
             renderItem={({ item }) => <CourseCard c={item} />}
             contentContainerStyle={{
@@ -167,7 +174,7 @@ export default function CoursesScreen() {
       </View>
 
 
-    </>
+    </ScreenWrapper>
       
        </>
     );

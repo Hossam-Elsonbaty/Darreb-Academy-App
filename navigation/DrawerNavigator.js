@@ -23,8 +23,8 @@ const Stack = createNativeStackNavigator();
 function CoursesStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Courses" component={CoursesScreen}    />
-      <Stack.Screen name="CourseDetails" component={CourseDetails}  />
+      <Stack.Screen name="Courses" component={CoursesScreen}   />
+      <Stack.Screen name="CourseDetails" component={CourseDetails} />
     </Stack.Navigator>
   );
 }
