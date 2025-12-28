@@ -16,6 +16,7 @@ import CoursesScreen from '../screens/CoursesScreen';
 import LoginScreen from '../screens/LoginScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import CourseDetails from 'screens/CourseDetails';
+import Profile from 'screens/Profile';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -23,8 +24,8 @@ const Stack = createNativeStackNavigator();
 function CoursesStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Courses" component={CoursesScreen}    />
-      <Stack.Screen name="CourseDetails" component={CourseDetails}  />
+      <Stack.Screen name="Courses" component={CoursesScreen} />
+      <Stack.Screen name="CourseDetails" component={CourseDetails} />
     </Stack.Navigator>
   );
 }
@@ -64,8 +65,6 @@ export default function DrawerNavigator() {
           ),
         }}
       />
-  
-
 
       <Drawer.Screen
         name="About"
@@ -87,18 +86,19 @@ export default function DrawerNavigator() {
             <Ionicons name="mail-outline" size={size} color={color} />
           ),
         }}
-        
       />
 
-       <Drawer.Screen
+      <Drawer.Screen
         name="Enroll"
         component={AfterEnroll}
         options={{
           title: links[3],
           drawerIcon: ({ color, size }) => (
             <Ionicons name="mail-outline" size={size} color={color} />
-          ),}}/>
-        {/* <Drawer.Screen
+          ),
+        }}
+      />
+      {/* <Drawer.Screen
         name="Courses"
         component={CoursesScreen}
         options={{
@@ -147,17 +147,26 @@ export default function DrawerNavigator() {
           ),
         }}  />
         }}/> */}
-        <Drawer.Screen
-  name="Courses"
-  component={CoursesStack}
-  options={{
-    title: links[3],
-    drawerIcon: ({ color, size }) => (
-      <Ionicons name="book-outline" size={size} color={color} />
-    ),
-  }}
-/>
-
+      <Drawer.Screen
+        name="Courses"
+        component={CoursesStack}
+        options={{
+          title: links[3],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="book-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: links[4],
+          drawerIcon: ({ color, size }) => (
+            <Ionicons name="book-outline" size={size} color={color} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
