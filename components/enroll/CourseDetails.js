@@ -37,12 +37,12 @@ export default function CourseDeatils() {
         horizontal
         showsHorizontalScrollIndicator={false}
         className="rounded-xl bg-lightGreen px-4 py-4">
-        {links.map((link) => {
+        {links.map((link,index) => {
           const isActive = active === link;
 
           return (
             <Pressable
-              key={link}
+              key={index}
               onPress={() => handleContent(link)}
               className={`mr-3 rounded-xl border px-6 py-3
                 ${isActive ? 'border-main bg-main' : 'border-gray-200 bg-white'}

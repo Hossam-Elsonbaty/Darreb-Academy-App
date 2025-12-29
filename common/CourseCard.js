@@ -21,10 +21,10 @@ const coursesImages = [
   require('../assets/courses-04.jpg'),
   require('../assets/courses-05.jpg'),
 ];
-export default function CourseCard({ c, status }) {
+export default function CourseCard({ c, status,navigation }) {
   const { language } = useLanguage();
   const isRTL = language === 'ar';
-  const { addToCart, isInCart, removeFromCart } = useCart();
+  const { addToCart, removeFromCart } = useCart();
   const { addToWishlist, isInWishlist, removeFromWishlist } = useWishlist();
   const courseImage = useMemo(() => ({ uri: c.thumbnail }), [c.thumbnail]);
   const courseImg = useMemo(
@@ -35,7 +35,7 @@ export default function CourseCard({ c, status }) {
     () => profileImages[Math.floor(Math.random() * profileImages.length)],
     []
   );
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
      <Pressable
@@ -45,9 +45,9 @@ export default function CourseCard({ c, status }) {
       courseId: c._id,
         })
       }
-      className="mb-10 rounded-2xl border border-main bg-white shadow-md active:opacity-90">
+      >
     
-    <View className="mb-10 rounded-2xl border border-main bg-white shadow-md">
+    <View className="mb-10 rounded-2xl border border-main bg-white p-1 m-5">
       {/* Course Image */}
       <View className="overflow-hidden rounded-xl p-3">
         <Image source={courseImage} contentFit="cover" style={{ height: 200 }} />
@@ -70,17 +70,19 @@ export default function CourseCard({ c, status }) {
         </TouchableOpacity>
         <TouchableOpacity
           className="rounded-full bg-white p-2 "
-          onPress={() => {
-            if (isInCart(c._id)) {
-              removeFromCart(c._id);
-            } else {
-              addToCart(c);
-            }
-          }}>
+          onPress={() => addToCart(c)}
+          // onPress={() => {
+          //   if (isInCart(c._id)) {
+          //     removeFromCart(c._id);
+          //   } else {
+          //     addToCart(c);
+          //   }
+          // }}
+          >
           <Ionicons
-            name={isInCart(c._id) ? 'cart' : 'cart-outline'}
+            name='cart-outline'
             size={20}
-            color={isInCart(c._id) ? '#309255' : '#999'}
+            color='#999'
           />
         </TouchableOpacity>
       </View>
@@ -172,9 +174,9 @@ export default function CourseCard({ c, status }) {
               }}>
               {c.totalRatings || 0}
             </Text>
-            {[1, 2, 3, 4, 5].map((i) => (
+            {[1, 2, 3, 4, 5].map((i,key) => (
               <Ionicons
-                key={i}
+                key={key}
                 name={i <= Math.round(c.totalRatings) ? 'star' : 'star-outline'}
                 size={14}
                 color="#facc15"

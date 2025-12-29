@@ -2,7 +2,7 @@
   "home": "Home Screen",
   "about": "About Screen",
 
-  "links": ["Home", "About", "Contact", "After Enroll"],
+  "links": ["Home", "About", "Contact Us", "All Courses","Cart","Wishlist","Your Profile","Register","Login","Logout"],
   "hero": {
     "subTitle": "Start your favorite course",
     "desc": "It has survived not only five centuries but also the leap into electronic typesetting.",

@@ -27,8 +27,8 @@ export default function Works() {
         }
       />
 
-      {work.map((w) => (
-        <View key={w.id} className="my-3 flex-col items-center gap-3 bg-lightGreen p-4">
+      {work.map((w,i) => (
+        <View key={i} className="my-3 flex-col items-center gap-3 bg-lightGreen p-4">
           <View className=" rounded-full bg-white p-5">
             <Image source={iconImages[w.id - 1]} contentFit="cover" className="h-10 w-10" />
           </View>

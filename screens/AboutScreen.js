@@ -103,30 +103,17 @@ export default function AboutScreen() {
           {/* Left content */}
           <View className="flex-1 gap-4">
             {/* Breadcrumbs */}
-            {language === 'en' ? (
-              <View className="flex-row gap-2">
-                <Text className="text-gray-500">Home</Text>
-                <Text className="text-gray-400">/</Text>
-                <Text className="font-medium text-[#309255]">About</Text>
-              </View>
-            ) : (
-              <View className="flex-row gap-2">
-                <Text className="text-gray-500">الرئيسية</Text>
-                <Text className="text-gray-400">/</Text>
-                <Text className="font-medium text-[#309255]">من نحن</Text>
-              </View>
-            )}
             {/* Title */}
             {language === 'en' ? (
               <View className="flex-row items-center gap-2">
                 <Text className="text-2xl font-medium">About</Text>
-                <Text className="text-2xl font-medium text-[#309255]">Edule</Text>
+                <Text className="text-2xl font-medium text-[#309255]">Darreb Academy</Text>
               </View>
             ) : (
               <View className="flex-row items-center gap-2">
                 <Text className="text-4xl font-medium">
                   عن
-                  <Text className="text-[#309255]">ايدول</Text>
+                  <Text className="text-[#309255]">أكاديمية درب</Text>
                 </Text>
               </View>
             )}
@@ -135,7 +122,7 @@ export default function AboutScreen() {
           {/* Right Image */}
           <View className="flex-1 items-end">
             <Image
-              source={require('../assets/author03.jpg')}
+              source={require('../assets/author-04.jpg')}
               className="h-40 w-40 rounded-full"
               resizeMode="cover"
             />

@@ -25,8 +25,8 @@ export default function News() {
       />
 
       <View>
-        {news.map((c) => (
-          <View key={c.id} className='mb-3 '>
+        {news.map((c,i) => (
+          <View key={i} className='mb-3 '>
             <CourseCard c={c} status="news" />
           </View>
         ))}
