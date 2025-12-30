@@ -16,6 +16,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Toast from "react-native-toast-message";
 
 import loginimg from "../assets/login.png";
+import { useAuth } from "context/AuthContext";
 
 
 const inputClassName = `
@@ -31,7 +32,7 @@ export default function LoginScreen() {
   const { language } = useContext(LanguageContext);
   const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(false);
-
+  const {login} = useAuth()
   const {
     control,
     handleSubmit,
@@ -47,14 +48,13 @@ export default function LoginScreen() {
           password: data.password,
         }
       );
-
       const token = response.data.data.token;
       const userData = response.data.data;
 
       if (token) {
-        await AsyncStorage.setItem("token", token);
-        await AsyncStorage.setItem("userData", JSON.stringify(userData));
-
+        login(userData, token)
+        // await AsyncStorage.setItem("token", token);
+        // await AsyncStorage.setItem("userData", JSON.stringify(userData));
         Toast.show({
           type: "success",
           text1: language === "en" ? "Success" : "تم بنجاح",
@@ -63,7 +63,6 @@ export default function LoginScreen() {
               ? "Logged in successfully"
               : "تم تسجيل الدخول بنجاح",
         });
-
         navigation.navigate("Home");
       }
     } catch (error) {
@@ -199,11 +198,11 @@ export default function LoginScreen() {
           </Pressable>
 
           {/* GOOGLE */}
-          <Pressable className="bg-[#e7f8ee] border border-[rgba(48,146,85,0.2)] py-4 rounded-lg">
+          {/* <Pressable className="bg-[#e7f8ee] border border-[rgba(48,146,85,0.2)] py-4 rounded-lg">
             <Text className="text-[#309255] text-lg font-medium text-center">
               {language === "en" ? "Login with Google" : "الدخول عبر جوجل"}
             </Text>
-          </Pressable>
+          </Pressable> */}
 
         </View>
       </View>

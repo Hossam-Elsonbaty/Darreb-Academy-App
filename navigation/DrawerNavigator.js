@@ -210,6 +210,7 @@ import CourseDetails from '../screens/CourseDetails';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AccountLayout from 'screens/AccountLayout';
+import { useAuth } from 'context/AuthContext';
 
 const Drawer = createDrawerNavigator();
 
@@ -229,35 +230,31 @@ function CoursesStack() {
 // Custom Drawer Content
 function CustomDrawerContent(props) {
   const { navigation } = props;
-  const [token, setToken] = useState(null);
+  // const [token, setToken] = useState(null);
   const { language, toggleLanguage } = useLanguage();
+  const {checkLoginStatus,logout,token} = useAuth()
   const links = t('links', { returnObjects: true });
 
   // Check token on mount and when drawer opens
-  useFocusEffect(
-    React.useCallback(() => {
-      checkToken();
-    }, [token])
-  );
-
-  const checkToken = async () => {
-    const storedToken = await AsyncStorage.getItem("token");
-    setToken(storedToken);
-  };
+  useEffect(() => {
+    // Check AsyncStorage on mount
+    checkLoginStatus();
+  }, []);
+  // const checkToken = async () => {
+  //   const storedToken = await AsyncStorage.getItem("token");
+  //   setToken(storedToken);
+  // };
 
   const handleLogout = async () => {
     try {
-      await AsyncStorage.removeItem("token");
-      await AsyncStorage.removeItem("userData");
-      setToken(null);
+      await logout(); // Use context logout
       navigation.navigate("Home");
       console.log("Logged out successfully");
     } catch (error) {
       console.error("Error logging out:", error);
     }
-  };
-
-  const DrawerItem = ({ name, icon, label, onPress }) => (
+  }
+    const DrawerItem = ({ name, icon, label, onPress }) => (
     <TouchableOpacity
       onPress={onPress || (() => navigation.navigate(name))}
       className="flex-row items-center px-4 py-3 gap-4"

@@ -223,13 +223,13 @@ const Courses = ({navigation}) => {
                     {/* Title */}
                     {language === 'en' ? (
                       <View className="flex-row items-center gap-2">
-                        <Text className="text-2xl font-medium">Course</Text>
-                        <Text className="text-2xl font-medium text-[#309255]">Details</Text>
+                        <Text className="text-2xl font-medium">All</Text>
+                        <Text className="text-2xl font-medium text-[#309255]">Courses</Text>
                       </View>
                     ) : (
                       <View className="flex-row items-center gap-2">
                         <Text className="text-4xl font-medium">
-                          تفاصيل
+                          جميع
                           <Text className="text-[#309255]">الدورة</Text>
                         </Text>
                       </View>

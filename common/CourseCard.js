@@ -105,7 +105,7 @@ export default function CourseCard({ c, status,navigation }) {
           <Text
             className="text-sm font-medium text-main"
             style={{ textAlign: isRTL ? 'right' : 'left' }}>
-            {c.category?.name || (language === 'en' ? 'All' : 'جميع الفئات')}
+            {c.category?.name || ( language === 'en' ?'All' : 'جميع الفئات')}
           </Text>
         </View>
       </View>
@@ -117,7 +117,7 @@ export default function CourseCard({ c, status,navigation }) {
           textAlign: isRTL ? 'right' : 'left',
           writingDirection: isRTL ? 'rtl' : 'ltr',
         }}>
-        {c.title}
+        {language === 'en' ? c.title : c.title_ar}
       </Text>
 
       {/* Info Row */}

@@ -266,11 +266,11 @@ const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
           </Pressable>
 
           {/* GOOGLE */}
-          <Pressable className="bg-[#e7f8ee] border border-[rgba(48,146,85,0.2)] py-4 rounded-lg">
+          {/* <Pressable className="bg-[#e7f8ee] border border-[rgba(48,146,85,0.2)] py-4 rounded-lg">
             <Text className="text-[#309255] text-lg font-medium text-center">
               Sign up with Google
             </Text>
-          </Pressable>
+          </Pressable> */}
 
         </View>
       </View>

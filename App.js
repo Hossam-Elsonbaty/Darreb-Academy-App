@@ -15,10 +15,12 @@ import { store } from './Store/store.js';
 import Footer from './components/Footer';
 import Toaster from 'components/Toaster';
 import { ToasterProvider } from './context/ToasterContext';
+import { AuthProvider } from './context/AuthContext';
 export default function App() {
   let Stack = createNativeStackNavigator();
   return (
     <>
+    <AuthProvider>
       <Provider store={store}>
         <ToasterProvider>
           <LanguageProvider>
@@ -34,6 +36,7 @@ export default function App() {
         </ToasterProvider>
       </Provider>
       <Toast />
+    </AuthProvider>
     </>
   );
 }

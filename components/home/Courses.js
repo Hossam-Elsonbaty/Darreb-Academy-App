@@ -304,7 +304,7 @@ const Categories = ({navigation}) => {
       <View className="mb-6">
         {language === 'en' ? (
           <Text className="text-4xl font-medium capitalize">
-            all <Text className="text-[#309255]">courses</Text> of edule
+            all <Text className="text-[#309255]">courses</Text> of Darreb Academy
           </Text>
         ) : (
           <Text className="text-4xl font-medium">
