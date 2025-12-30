@@ -202,13 +202,14 @@ import AboutScreen from '../screens/AboutScreen';
 import ContactScreen from '../screens/ContactScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import LoginScreen from '../screens/LoginScreen';
-import AfterEnroll from '../screens/AfterEnroll';
+import WatchCourse from '../screens/WatchScreen';
 import Cart from '../screens/Cart';
 import Wishlist from '../screens/Wishlist';
 import CoursesScreen from '../screens/CoursesScreen';
 import CourseDetails from '../screens/CourseDetails';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import AccountLayout from 'screens/AccountLayout';
 
 const Drawer = createDrawerNavigator();
 
@@ -314,7 +315,13 @@ function CustomDrawerContent(props) {
           icon={<Ionicons name="heart-outline" size={24} color="#4B5563" />}
           label={links[5]}
         />
-
+        {token && (
+          <DrawerItem
+            name="Account"
+            icon={<Ionicons name="person-outline" size={24} color="#4B5563" />}
+            label={language === 'ar' ? 'حسابي' : 'My Account'}
+          />
+        )}
         {/* Authentication Items */}
         {!token ? (
           <>
@@ -387,6 +394,14 @@ export default function DrawerNavigator() {
       <Drawer.Screen name="Register" component={RegisterScreen} />
       <Drawer.Screen name="Login" component={LoginScreen} />
       <Drawer.Screen name="CourseDetails" component={CourseDetails} />
+      <Drawer.Screen name="WatchCourse" component={WatchCourse} />
+      <Drawer.Screen 
+        name="Account" 
+        component={AccountLayout}
+        options={{
+          title: language === 'ar' ? 'الحساب' : 'Account',
+        }}
+      />
     </Drawer.Navigator>
   );
 }

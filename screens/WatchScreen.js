@@ -296,7 +296,7 @@ import { useLanguage } from '../context/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const CourseWatch = ({ route }) => {
-  const { id } = route.params; // Get course ID from navigation params
+  const { courseId } = route.params; // Get course ID from navigation params
   const [courseData, setCourseData] = useState(null);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
@@ -314,7 +314,7 @@ const CourseWatch = ({ route }) => {
       try {
         setLoading(true);
         const token = await AsyncStorage.getItem('token');
-        const response = await api.get(`/users/me/courses/${id}`, {
+        const response = await api.get(`/users/me/courses/${courseId}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCourseData(response.data.data);
@@ -336,7 +336,7 @@ const CourseWatch = ({ route }) => {
       }
     };
     fetchCourseDetails();
-  }, [id]);
+  }, [courseId]);
 
   const toggleChapter = (chapterId) => {
     setExpandedChapters((prev) => ({
